@@ -1,0 +1,53 @@
+##################################
+# Visual Studio 類專案忽略規則
+##################################
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Rr]elease/
+[Dd]ebug/
+*.log
+
+## VS temporary folders
+.vs/
+
+## SQL Server LocalDB database files
+*.mdf
+*.ldf
+
+## Entity Framework model backup
+*.edmx.diagram
+*.edmx.sql
+
+## IIS Express 設定檔
+.vscode/
+.vsconfig
+*.iisexpress
+*.vspscc
+*.vssscc
+
+## Others
+*.dbmdl
+*.cache
+*.tmp
+_ReSharper*/              # JetBrains 插件產物
+*.ncrunch*                # 測試工具產物
+*.dotCover                # 測試覆蓋率工具
+*.orig                    # 合併衝突殘留檔案
+*.bak                     # 備份檔
+
+# npm / yarn 如果前端有用到
+node_modules/
+
+# 團隊不要上傳個人設定的話，也可以忽略 launchSettings.json
+# Properties/launchSettings.json
+
