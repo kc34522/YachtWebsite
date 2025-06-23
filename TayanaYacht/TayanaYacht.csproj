@@ -99,7 +99,130 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
+    <Content Include="Assets\css\csshover.htc" />
+    <Content Include="Assets\css\homestyle.css" />
+    <Content Include="Assets\css\iepngfix.htc" />
+    <Content Include="Assets\css\jquery.ad-gallery.css" />
+    <Content Include="Assets\css\js.css" />
+    <Content Include="Assets\css\reset.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\images\ad_next.png" />
+    <Content Include="Assets\images\ad_prev.png" />
+    <Content Include="Assets\images\ad_scroll_back.png" />
+    <Content Include="Assets\images\ad_scroll_forward.png" />
+    <Content Include="Assets\images\back.gif" />
+    <Content Include="Assets\images\banner001.jpg" />
+    <Content Include="Assets\images\banner001b.jpg" />
+    <Content Include="Assets\images\banner002.jpg" />
+    <Content Include="Assets\images\banner002b.jpg" />
+    <Content Include="Assets\images\banner003.jpg" />
+    <Content Include="Assets\images\banner003b.jpg" />
+    <Content Include="Assets\images\banner004.jpg" />
+    <Content Include="Assets\images\banner004b.jpg" />
+    <Content Include="Assets\images\banner005.jpg" />
+    <Content Include="Assets\images\banner005b.jpg" />
+    <Content Include="Assets\images\banner006.jpg" />
+    <Content Include="Assets\images\banner006b.jpg" />
+    <Content Include="Assets\images\banner00_masks.png" />
+    <Content Include="Assets\images\banner01_masks.png" />
+    <Content Include="Assets\images\banner02_masks.png" />
+    <Content Include="Assets\images\banner_masks.png" />
+    <Content Include="Assets\images\bg1.jpg" />
+    <Content Include="Assets\images\buttbg.gif" />
+    <Content Include="Assets\images\buttleft.gif" />
+    <Content Include="Assets\images\buttom01.gif" />
+    <Content Include="Assets\images\buttom02.gif" />
+    <Content Include="Assets\images\buttom03.gif" />
+    <Content Include="Assets\images\buttright.gif" />
+    <Content Include="Assets\images\changbg.gif" />
+    <Content Include="Assets\images\changbg.png" />
+    <Content Include="Assets\images\changbg1.gif" />
+    <Content Include="Assets\images\changbg1.png" />
+    <Content Include="Assets\images\company.jpg" />
+    <Content Include="Assets\images\contact.jpg" />
+    <Content Include="Assets\images\con_bg.gif" />
+    <Content Include="Assets\images\DEALERS.jpg" />
+    <Content Include="Assets\images\dealers001.jpg" />
+    <Content Include="Assets\images\dealers002.jpg" />
+    <Content Include="Assets\images\dealers003.jpg" />
+    <Content Include="Assets\images\dealers004.jpg" />
+    <Content Include="Assets\images\deckplan01.jpg" />
+    <Content Include="Assets\images\default1.jpg" />
+    <Content Include="Assets\images\default2.jpg" />
+    <Content Include="Assets\images\downloads.gif" />
+    <Content Include="Assets\images\footer.jpg" />
+    <Content Include="Assets\images\i001.jpg" />
+    <Content Include="Assets\images\i002.jpg" />
+    <Content Include="Assets\images\i003.jpg" />
+    <Content Include="Assets\images\i004.jpg" />
+    <Content Include="Assets\images\i005.jpg" />
+    <Content Include="Assets\images\i006.jpg" />
+    <Content Include="Assets\images\icon001.gif" />
+    <Content Include="Assets\images\icon002.gif" />
+    <Content Include="Assets\images\icon003.gif" />
+    <Content Include="Assets\images\icon004.gif" />
+    <Content Include="Assets\images\icon005.gif" />
+    <Content Include="Assets\images\icon006.gif" />
+    <Content Include="Assets\images\icon007.gif" />
+    <Content Include="Assets\images\icon008.gif" />
+    <Content Include="Assets\images\images\menu_y1_04.jpg" />
+    <Content Include="Assets\images\images\menu_y1_05.jpg" />
+    <Content Include="Assets\images\images\menu_y1_06.jpg" />
+    <Content Include="Assets\images\images\menu_y2_04.jpg" />
+    <Content Include="Assets\images\images\menu_y2_05.jpg" />
+    <Content Include="Assets\images\images\menu_y2_06.jpg" />
+    <Content Include="Assets\images\lefttop.gif" />
+    <Content Include="Assets\images\loader.gif" />
+    <Content Include="Assets\images\menu.gif" />
+    <Content Include="Assets\images\menu1_03.gif" />
+    <Content Include="Assets\images\menu1_04.gif" />
+    <Content Include="Assets\images\menu1_05.gif" />
+    <Content Include="Assets\images\menu1_06.gif" />
+    <Content Include="Assets\images\menu1_07.gif" />
+    <Content Include="Assets\images\menu2_03.gif" />
+    <Content Include="Assets\images\menu2_04.gif" />
+    <Content Include="Assets\images\menu2_05.gif" />
+    <Content Include="Assets\images\menu2_06.gif" />
+    <Content Include="Assets\images\menu2_07.gif" />
+    <Content Include="Assets\images\menu_y1_03.jpg" />
+    <Content Include="Assets\images\menu_y1_04.jpg" />
+    <Content Include="Assets\images\menu_y1_05.jpg" />
+    <Content Include="Assets\images\menu_y1_06.jpg" />
+    <Content Include="Assets\images\menu_y2_03.jpg" />
+    <Content Include="Assets\images\menu_y2_04.jpg" />
+    <Content Include="Assets\images\menu_y2_05.jpg" />
+    <Content Include="Assets\images\menu_y2_06.jpg" />
+    <Content Include="Assets\images\new01.png" />
+    <Content Include="Assets\images\newbanner.jpg" />
+    <Content Include="Assets\images\news.gif" />
+    <Content Include="Assets\images\new_top01.png" />
+    <Content Include="Assets\images\opa75.png" />
+    <Content Include="Assets\images\pit001.jpg" />
+    <Content Include="Assets\images\pit002.jpg" />
+    <Content Include="Assets\images\pit003.jpg" />
+    <Content Include="Assets\images\pit004.jpg" />
+    <Content Include="Assets\images\pit006.jpg" />
+    <Content Include="Assets\images\pit007.jpg" />
+    <Content Include="Assets\images\pit008.jpg" />
+    <Content Include="Assets\images\pit009.jpg" />
+    <Content Include="Assets\images\pit010.jpg" />
+    <Content Include="Assets\images\sub_bg.gif" />
+    <Content Include="Assets\images\test002.jpg" />
+    <Content Include="Assets\images\test1.jpg" />
+    <Content Include="Assets\images\tog.jpg" />
+    <Content Include="Assets\images\top.gif" />
+    <Content Include="Assets\images\transparent.gif" />
+    <Content Include="Assets\images\ya01.jpg" />
+    <Content Include="Assets\javascript\iepngfix_tilebg.js" />
+    <Content Include="Assets\javascript\pngfix.js" />
+    <Content Include="Assets\Scripts\AC_RunActiveContent.js" />
+    <Content Include="Assets\Scripts\jquery-1.6.1.min.js" />
+    <Content Include="Assets\Scripts\jquery.ad-gallery.js" />
+    <Content Include="Assets\Scripts\jquery.cycle.all.2.74.js" />
+    <Content Include="Assets\Scripts\jquery.cycle.all.latest.js" />
+    <Content Include="Assets\Scripts\jquery.event.hover-1.0.js" />
+    <Content Include="Assets\Scripts\jquery.min.js" />
+    <Content Include="Assets\Scripts\jquery.timers.js" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -121,6 +244,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="UserControls\LeftMenu.ascx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -149,7 +273,11 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="UserControls\MainContentTitle.ascx" />
+    <Content Include="UserControls\RightMenu.ascx" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="Assets\images\images\Thumbs.db" />
+    <Content Include="Assets\images\Thumbs.db" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -185,13 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -210,6 +331,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\LeftMenu.ascx.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\LeftMenu.ascx.designer.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -224,6 +352,20 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MainContentTitle.ascx.cs">
+      <DependentUpon>MainContentTitle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MainContentTitle.ascx.designer.cs">
+      <DependentUpon>MainContentTitle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RightMenu.ascx.cs">
+      <DependentUpon>RightMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\RightMenu.ascx.designer.cs">
+      <DependentUpon>RightMenu.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -243,7 +385,7 @@
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\" />
+    <Folder Include="Assets\images\新增資料夾\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

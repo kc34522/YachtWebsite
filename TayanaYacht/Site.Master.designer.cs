@@ -15,6 +15,69 @@ namespace TayanaYacht
     {
 
         /// <summary>
+        /// form1 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
+        /// bannerMask 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder bannerMask;
+
+        /// <summary>
+        /// bannerSmall 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder bannerSmall;
+
+        /// <summary>
+        /// banner 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder banner;
+
+        /// <summary>
+        /// LeftMenuControl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::TayanaYacht.LeftMenu LeftMenuControl;
+
+        /// <summary>
+        /// RightMenuControl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::TayanaYacht.UserControls.RightMenu RightMenuControl;
+
+        /// <summary>
+        /// MainContentTitleControl 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::TayanaYacht.UserControls.MainContentTitle MainContentTitleControl;
+
+        /// <summary>
         /// MainContent 控制項。
         /// </summary>
         /// <remarks>
