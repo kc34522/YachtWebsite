@@ -142,8 +142,8 @@ namespace TayanaYacht
             ";
 
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("~~~~~~~~~~~~~~~~"); // 寄件者（需是SMTP設定的帳號）
-            mail.To.Add("kellychiang123@gmail.com"); // 收件者
+            mail.From = new MailAddress("XXXXXXXXXXXXXXXX"); // 寄件者（需是SMTP設定的帳號）
+            mail.To.Add("XXXXXXXXXXXXXXXXXXXXXXXXXX"); // 收件者
             mail.Subject = "【Tayana 聯絡表單】有新留言 ";
             mail.Body = body;
             mail.IsBodyHtml = true; //m這封信的內容是 HTML 格式，而不是純文字。
@@ -156,7 +156,7 @@ namespace TayanaYacht
 
 
             // 登入帳號密碼（使用寄件者的帳密）
-            smtp.Credentials = new NetworkCredential("~~~~~~~~~~~~~~~~", "~~~~~~~~~~~~~~~~~~");
+            smtp.Credentials = new NetworkCredential("XXXXXXXXXXXXXX", "XXXXXXXXXXXXXXXXX");
 
             // 寄出信件
             smtp.Send(mail);
