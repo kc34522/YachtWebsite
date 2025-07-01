@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -63,6 +64,21 @@ namespace TayanaYacht
 
                 case "Dealers":
                     TitleText = "DEALERS";
+                    string sql = @"SELECT   Name
+                                    FROM     Country
+                                    WHERE   (IsForDealer = 1)";
+                    using(SqlConnection sqlConnection1 = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    {
+                        using(SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection1))
+                        {
+                            sqlConnection1.Open();
+                            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                            while (sqlDataReader.Read())
+                            {
+                                items.Add(new MenuItem { Url = "Dealers.aspx?Id="+ sqlDataReader["Id"].ToString(), Text = sqlDataReader["Name"].ToString() });
+                            }
+                        }
+                    }
                     break;
 
                 case "Contact":
