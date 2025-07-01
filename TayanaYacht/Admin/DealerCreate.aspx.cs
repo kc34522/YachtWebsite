@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TayanaYacht.Admin
 {
-    public partial class Dealers : System.Web.UI.Page
+    public partial class DealerCreate : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
