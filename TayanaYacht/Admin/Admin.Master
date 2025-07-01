@@ -73,7 +73,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Dealers.aspx">
+                    <a class="nav-link" href="DealerList.aspx">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Dealers</span>
                     </a>
@@ -90,6 +90,24 @@
                         <span>User Management</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="DealerList.aspx" data-toggle="collapse" data-target="#collapseUtilities"
+                        aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Dealers</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Dealers</h6>
+                            <a class="collapse-item" href="DealerList.aspx">Dealer List</a>
+                            <a class="collapse-item" href="DealerEdit.aspx">Add Dealer</a>
+                            <a class="collapse-item" href="CountryRegionManage.aspx">Country/Region Manage</a>
+                        </div>
+                    </div>
+                </li>
+                
 
                 <%-- <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
