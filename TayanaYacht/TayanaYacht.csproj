@@ -101,8 +101,11 @@
   <ItemGroup>
     <Content Include="Admin\AdminUser.aspx" />
     <Content Include="Admin\Contact.aspx" />
+    <Content Include="Admin\CountryRegionManage.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
-    <Content Include="Admin\Dealers.aspx" />
+    <Content Include="Admin\DealerCreate.aspx" />
+    <Content Include="Admin\DealerList.aspx" />
+    <Content Include="Admin\DealerEdit.aspx" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\News.aspx" />
     <Content Include="Admin\Yachts.aspx" />
@@ -1789,6 +1792,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Dealers.aspx" />
     <Content Include="Front_Assets\css\csshover.htc" />
     <Content Include="Front_Assets\css\homestyle.css" />
     <Content Include="Front_Assets\css\iepngfix.htc" />
@@ -1965,7 +1969,6 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="UserControls\MainContentTitle.ascx" />
     <Content Include="UserControls\RightMenu.ascx" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="Front_Assets\images\images\Thumbs.db" />
     <Content Include="Front_Assets\images\Thumbs.db" />
     <Content Include="Admin\Admin.Master" />
@@ -2196,6 +2199,13 @@
     <Compile Include="Admin\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\CountryRegionManage.aspx.cs">
+      <DependentUpon>CountryRegionManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\CountryRegionManage.aspx.designer.cs">
+      <DependentUpon>CountryRegionManage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2203,12 +2213,26 @@
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Dealers.aspx.cs">
-      <DependentUpon>Dealers.aspx</DependentUpon>
+    <Compile Include="Admin\DealerCreate.aspx.cs">
+      <DependentUpon>DealerCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Dealers.aspx.designer.cs">
-      <DependentUpon>Dealers.aspx</DependentUpon>
+    <Compile Include="Admin\DealerCreate.aspx.designer.cs">
+      <DependentUpon>DealerCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DealerList.aspx.cs">
+      <DependentUpon>DealerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DealerList.aspx.designer.cs">
+      <DependentUpon>DealerList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DealerEdit.aspx.cs">
+      <DependentUpon>DealerEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DealerEdit.aspx.designer.cs">
+      <DependentUpon>DealerEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -2239,6 +2263,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dealers.aspx.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dealers.aspx.designer.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -2293,17 +2324,11 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Front_Assets\images\新增資料夾\" />
+    <Folder Include="Upload\Dealers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
