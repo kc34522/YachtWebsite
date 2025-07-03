@@ -1,27 +1,105 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TayanaYacht.SiteMaster" %>
+﻿<%@ Register Src="~/UserControls/LeftMenu.ascx" TagPrefix="uc" TagName="LeftMenu" %>
+<%@ Register Src="~/UserControls/RightMenu.ascx" TagPrefix="uc" TagName="RightMenu" %>
+<%@ Register Src="~/UserControls/MainContentTitle.ascx" TagPrefix="uc" TagName="MainContentTitle" %>
+
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TayanaYacht.SiteMaster" %>
 
 <!DOCTYPE html>
 
 <html lang="zh">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title><%: Page.Title %></title>
 
- 
+    <link href="<%= ResolveUrl("~/Front_Assets/css/style.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Front_Assets/css/reset.css") %>" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server"></asp:ContentPlaceHolder>
 
 </head>
 <body>
-    <form runat="server">
-      
-        <div>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-          
-         
+    <form id="form1" runat="server">
+
+        <div class="contain">
+            <div class="sub">
+                <p><a href="Index.aspx">Home</a></p>
+            </div>
+
+            <!--------------------------------選單開始---------------------------------------------------->
+            <div class="menu">
+                <ul>
+                    <li class="menuli01"><a href="#">Yachts</a></li>
+                    <li class="menuli02"><a href="#">NEWS</a></li>
+                    <li class="menuli03"><a href="#">COMPANY</a></li>
+                    <li class="menuli04"><a href="/Dealers.aspx">DEALERS</a></li>
+                    <li class="menuli05"><a href="/Contact.aspx">CONTACT</a></li>
+                </ul>
+            </div>
+            <!--------------------------------選單開始結束---------------------------------------------------->
+
+            <!--遮罩-->
+            <div class="bannermasks">
+                <asp:ContentPlaceHolder ID="bannerMask" runat="server"></asp:ContentPlaceHolder>
+            </div>
+            <!--遮罩結束-->
+            <!--小圖開始-->
+            <asp:ContentPlaceHolder ID="bannerSmall" runat="server"></asp:ContentPlaceHolder>
+            <!--小圖結束-->
+
+            <!--------------------------------換圖開始---------------------------------------------------->
+            <asp:ContentPlaceHolder ID="banner" runat="server"></asp:ContentPlaceHolder>
+            <!--------------------------------換圖結束---------------------------------------------------->
+            <div class="conbg">
+
+                <!--------------------------------左邊選單開始---------------------------------------------------->
+                <uc:LeftMenu ID="LeftMenuControl" runat="server" />
+
+                <!--------------------------------左邊選單結束---------------------------------------------------->
+
+                <!--------------------------------右邊選單開始---------------------------------------------------->
+
+                <uc:RightMenu ID="RightMenuControl" runat="server" />
+                <div class="right">
+                    <div class="right1">
+                        <uc:MainContentTitle ID="MainContentTitleControl" runat="server" />
+
+                        <!--------------------------------內容開始---------------------------------------------------->
+
+
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        </asp:ContentPlaceHolder>
+
+                        <!--------------------------------內容結束------------------------------------------------------>
+                    </div>
+                </div>
+                <!--------------------------------右邊選單結束---------------------------------------------------->
+
+
+
+            </div>
+
+            <!--------------------------------落款開始---------------------------------------------------->
+            <div class="footer">
+                <p class="footerp01">© 1973-2011 Tayana Yachts, Inc. All Rights Reserved</p>
+                <div class="footer01">
+                    <span>No. 60, Hai Chien Road, Chung Men Li, Lin Yuan District, Kaohsiung City, Taiwan, R.O.C.</span><br />
+                    <span>TEL：+886(7)641-2721</span> <span>FAX：+886(7)642-3193</span><span><a href="mailto:tayangco@ms15.hinet.net">E-mail：tayangco@ms15.hinet.net</a>.</span>
+                </div>
+            </div>
+            <!--------------------------------落款結束---------------------------------------------------->
         </div>
     </form>
- 
+
+    <script type="text/javascript" src="<%= ResolveUrl("~/Assets/Scripts/jquery.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Assets/Scripts/jquery.cycle.all.2.74.js") %>"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.slideshow').cycle({
+                fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+            });
+        });
+    </script>
+
 </body>
 </html>
