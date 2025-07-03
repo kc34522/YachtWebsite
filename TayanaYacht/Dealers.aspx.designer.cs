@@ -11,88 +11,79 @@ namespace TayanaYacht
 {
 
 
-    public partial class SiteMaster
+    public partial class Dealers
     {
 
         /// <summary>
-        /// ContentPlaceHolderHead 控制項。
+        /// RepeaterDealerList 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderHead;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterDealerList;
 
         /// <summary>
-        /// form1 控制項。
+        /// LinkButtonFirst 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonFirst;
 
         /// <summary>
-        /// bannerMask 控制項。
+        /// LinkButtonPrev 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder bannerMask;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonPrev;
 
         /// <summary>
-        /// bannerSmall 控制項。
+        /// LabelCurrentPage 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder bannerSmall;
+        protected global::System.Web.UI.WebControls.Label LabelCurrentPage;
 
         /// <summary>
-        /// banner 控制項。
+        /// LinkButtonNext 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder banner;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonNext;
 
         /// <summary>
-        /// LeftMenuControl 控制項。
+        /// LinkButtonLast 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::TayanaYacht.LeftMenu LeftMenuControl;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonLast;
 
         /// <summary>
-        /// RightMenuControl 控制項。
+        /// LabelTotalItems 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::TayanaYacht.UserControls.RightMenu RightMenuControl;
+        protected global::System.Web.UI.WebControls.Label LabelTotalItems;
 
         /// <summary>
-        /// MainContentTitleControl 控制項。
+        /// LabelPageInfo 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::TayanaYacht.UserControls.MainContentTitle MainContentTitleControl;
-
-        /// <summary>
-        /// MainContent 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Label LabelPageInfo;
     }
 }
