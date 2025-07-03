@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -41,14 +42,17 @@ namespace TayanaYacht
                 default: return ""; 
             }
         }
+
+
         private void LoadMenu(string menuType)
         {
+            string currentPage = Path.GetFileName(Request.Path); // 自動抓目前頁面
+
             List<MenuItem> items = new List<MenuItem>();
             switch (menuType)
             {
                 case "Yachts":
                     TitleText = "YACHTS";
-                    SqlConnection sqlConnection = new SqlConnection();
                     break;
 
                 case "News":
@@ -64,18 +68,23 @@ namespace TayanaYacht
 
                 case "Dealers":
                     TitleText = "DEALERS";
-                    string sql = @"SELECT   Name
-                                    FROM     Country
-                                    WHERE   (IsForDealer = 1)";
-                    using(SqlConnection sqlConnection1 = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    string sql = @"SELECT Distinct Country.Id, Country.Name
+                            FROM     Country 
+                            INNER JOIN Region ON Country.Id = Region.CountryId 
+                            INNER JOIN Dealer ON Dealer.RegionId = Region.Id
+                            WHERE   (Dealer.IsActive = 1)
+                            ORDER BY Country.Name";
+                    using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
                     {
-                        using(SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection1))
+                        using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
                         {
-                            sqlConnection1.Open();
-                            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                            while (sqlDataReader.Read())
+                            sqlConnection.Open();
+                            using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                             {
-                                items.Add(new MenuItem { Url = "Dealers.aspx?Id="+ sqlDataReader["Id"].ToString(), Text = sqlDataReader["Name"].ToString() });
+                                while (sqlDataReader.Read())
+                                {
+                                    items.Add(new MenuItem { Url = $"Dealers.aspx?Id={sqlDataReader["Id"]}", Text = sqlDataReader["Name"].ToString() });
+                                }
                             }
                         }
                     }
