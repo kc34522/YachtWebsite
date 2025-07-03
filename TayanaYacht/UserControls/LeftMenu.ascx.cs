@@ -4,7 +4,9 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -40,14 +42,17 @@ namespace TayanaYacht
                 default: return ""; 
             }
         }
+
+
         private void LoadMenu(string menuType)
         {
+            string currentPage = Path.GetFileName(Request.Path); // 自動抓目前頁面
+
             List<MenuItem> items = new List<MenuItem>();
             switch (menuType)
             {
                 case "Yachts":
                     TitleText = "YACHTS";
-                    SqlConnection sqlConnection = new SqlConnection();
                     break;
 
                 case "News":
@@ -63,6 +68,26 @@ namespace TayanaYacht
 
                 case "Dealers":
                     TitleText = "DEALERS";
+                    string sql = @"SELECT Distinct Country.Id, Country.Name
+                            FROM     Country 
+                            INNER JOIN Region ON Country.Id = Region.CountryId 
+                            INNER JOIN Dealer ON Dealer.RegionId = Region.Id
+                            WHERE   (Dealer.IsActive = 1)
+                            ORDER BY Country.Name";
+                    using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                        {
+                            sqlConnection.Open();
+                            using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                            {
+                                while (sqlDataReader.Read())
+                                {
+                                    items.Add(new MenuItem { Url = $"Dealers.aspx?Id={sqlDataReader["Id"]}", Text = sqlDataReader["Name"].ToString() });
+                                }
+                            }
+                        }
+                    }
                     break;
 
                 case "Contact":

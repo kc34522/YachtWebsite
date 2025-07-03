@@ -1789,6 +1789,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Dealers.aspx" />
     <Content Include="Front_Assets\css\csshover.htc" />
     <Content Include="Front_Assets\css\homestyle.css" />
     <Content Include="Front_Assets\css\iepngfix.htc" />
@@ -1965,7 +1966,6 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="UserControls\MainContentTitle.ascx" />
     <Content Include="UserControls\RightMenu.ascx" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="Front_Assets\images\images\Thumbs.db" />
     <Content Include="Front_Assets\images\Thumbs.db" />
     <Content Include="Admin\Admin.Master" />
@@ -2240,6 +2240,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dealers.aspx.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dealers.aspx.designer.cs">
+      <DependentUpon>Dealers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2292,13 +2299,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
