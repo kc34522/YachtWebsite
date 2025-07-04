@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %></title>
 
-    <link href="<%= ResolveUrl("~/Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/Assets/css/reset.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Front_Assets/css/style.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Front_Assets/css/reset.css") %>" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server"></asp:ContentPlaceHolder>
 
 </head>
 <body>
@@ -31,8 +32,8 @@
                     <li class="menuli01"><a href="#">Yachts</a></li>
                     <li class="menuli02"><a href="#">NEWS</a></li>
                     <li class="menuli03"><a href="#">COMPANY</a></li>
-                    <li class="menuli04"><a href="#">DEALERS</a></li>
-                    <li class="menuli05"><a href="Contact.aspx">CONTACT</a></li>
+                    <li class="menuli04"><a href="/Dealers.aspx">DEALERS</a></li>
+                    <li class="menuli05"><a href="/Contact.aspx">CONTACT</a></li>
                 </ul>
             </div>
             <!--------------------------------選單開始結束---------------------------------------------------->
