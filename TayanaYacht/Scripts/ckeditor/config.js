@@ -10,4 +10,7 @@ CKEDITOR.editorConfig = function( config )
 	// config.uiColor = '#AADC6E';
 	config.removeDialogTabs = 'image:Upload;image:advanced;image:Link';
 
+	// (關鍵) 關閉對沒有區塊元素包裹的內容自動加上 <p>
+	config.autoParagraph = false;
+
 };

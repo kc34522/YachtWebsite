@@ -77,16 +77,16 @@ namespace TayanaYacht.UserControls
                     break;
 
                 case "Company":
-                    items.Add(new MenuItem { Url = "~/Company.aspx", Text = "Company" });
+                    items.Add(new MenuItem { Url = "Company.aspx", Text = "Company" });
 
                     // 數值待確
                     if (id == "2")
                     {
-                        items.Add(new MenuItem { Url = "~/Company.aspx?Id=2", Text = "Certificate" });
+                        items.Add(new MenuItem { Url = "Company.aspx?Id=2", Text = "Certificate" });
                     }
                     else
                     {
-                        items.Add(new MenuItem { Url = "~/Company.aspx?Id=1", Text = "About Us" });
+                        items.Add(new MenuItem { Url = "Company.aspx", Text = "About Us" });
                     }
                     break;
 
