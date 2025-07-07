@@ -73,6 +73,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompany"
+                        aria-expanded="true" aria-controls="collapseCompany">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Company</span>
+                    </a>
+                    <div id="collapseCompany" class="collapse" aria-labelledby="headingCompany"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Company Pages:</h6>
+                            <a class="collapse-item" href="AboutUs.aspx">About Us</a>
+                            <a class="collapse-item" href="Certificate.aspx">Certificate</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="DealerList.aspx">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Dealers</span>
@@ -107,7 +122,7 @@
                         </div>
                     </div>
                 </li>
-                
+
 
                 <%-- <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
