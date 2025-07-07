@@ -105,6 +105,7 @@
   <ItemGroup>
     <Content Include="Admin\AboutUs.aspx" />
     <Content Include="Admin\AdminUser.aspx" />
+    <Content Include="Admin\Certificate.aspx" />
     <Content Include="Admin\Contact.aspx" />
     <Content Include="Admin\CountryRegionManage.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
@@ -3201,6 +3202,13 @@
     </Compile>
     <Compile Include="Admin\AdminUser.aspx.designer.cs">
       <DependentUpon>AdminUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Certificate.aspx.cs">
+      <DependentUpon>Certificate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Certificate.aspx.designer.cs">
+      <DependentUpon>Certificate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
