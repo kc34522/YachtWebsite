@@ -62,8 +62,8 @@ namespace TayanaYacht
 
                 case "Company":
                     TitleText = "COMPANY";
-                    items.Add(new MenuItem { Url = "#", Text = "About Us" });
-                    items.Add(new MenuItem { Url = "#", Text = "Certificate" });
+                    items.Add(new MenuItem { Url = "Company.aspx", Text = "About Us" });
+                    items.Add(new MenuItem { Url = "Company.aspx?Id=2", Text = "Certificate" });
                     break;
 
                 case "Dealers":
