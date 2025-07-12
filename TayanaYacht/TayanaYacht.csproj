@@ -113,7 +113,8 @@
     <Content Include="Admin\DealerList.aspx" />
     <Content Include="Admin\DealerEdit.aspx" />
     <Content Include="Admin\Login.aspx" />
-    <Content Include="Admin\News.aspx" />
+    <Content Include="Admin\NewsAddEdit.aspx" />
+    <Content Include="Admin\NewsList.aspx" />
     <Content Include="Admin\Yachts.aspx" />
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
@@ -3260,12 +3261,19 @@
     <Compile Include="Admin\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\News.aspx.cs">
-      <DependentUpon>News.aspx</DependentUpon>
+    <Compile Include="Admin\NewsAddEdit.aspx.cs">
+      <DependentUpon>NewsAddEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\News.aspx.designer.cs">
-      <DependentUpon>News.aspx</DependentUpon>
+    <Compile Include="Admin\NewsAddEdit.aspx.designer.cs">
+      <DependentUpon>NewsAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\NewsList.aspx.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\NewsList.aspx.designer.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Yachts.aspx.cs">
       <DependentUpon>Yachts.aspx</DependentUpon>
@@ -3355,6 +3363,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Front_Assets\images\新增資料夾\" />
     <Folder Include="Upload\Dealers\" />
+    <Folder Include="Upload\News\Files\" />
+    <Folder Include="Upload\News\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
