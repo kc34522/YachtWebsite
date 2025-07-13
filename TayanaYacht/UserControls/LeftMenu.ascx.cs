@@ -35,7 +35,8 @@ namespace TayanaYacht
             switch (page)
             {
                 case "yachts": return "Yachts";
-                case "news": return "News";
+                case "newslist": return "News";
+                case "newsdetail": return "News";
                 case "company": return "Company";
                 case "dealers": return "Dealers";
                 case "contact": return "Contact";
@@ -57,7 +58,7 @@ namespace TayanaYacht
 
                 case "News":
                     TitleText = "NEWS";
-                    items.Add(new MenuItem { Url = "#", Text= "News & Events" });
+                    items.Add(new MenuItem { Url = "NewsList.aspx", Text= "News & Events" });
                     break;
 
                 case "Company":

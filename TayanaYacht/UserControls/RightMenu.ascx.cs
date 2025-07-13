@@ -31,7 +31,8 @@ namespace TayanaYacht.UserControls
             switch (page)
             {
                 case "yachts": return "Yachts";
-                case "news": return "News";
+                case "newslist": return "News";
+                case "newsdetail": return "News";
                 case "company": return "Company";
                 case "dealers": return "Dealers";
                 case "contact": return "Contact";
@@ -71,8 +72,7 @@ namespace TayanaYacht.UserControls
                     break;
 
                 case "News":
-                    items.Add(new MenuItem { Url = "~/News.aspx", Text = "News" });
-                    // 待變更
+                    items.Add(new MenuItem { Url = "NewsList.aspx", Text = "News" });                   
                     items.Add(new MenuItem { Url = "#", Text = "News & Events" });
                     break;
 

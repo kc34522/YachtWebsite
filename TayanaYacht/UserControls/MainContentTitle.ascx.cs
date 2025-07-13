@@ -34,7 +34,8 @@ namespace TayanaYacht.UserControls
                     //SqlConnection sqlConnection = new SqlConnection();
                     break;
 
-                case "news":
+                case "newslist":
+                case "newsdetail":
                     ContentTitle = "News & Events";
                     break;
 
@@ -83,9 +84,9 @@ namespace TayanaYacht.UserControls
             string countryName;
             string sql = @"SELECT Name FROM Country WHERE Id = @Id";
 
-            using(SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
-                using(SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
                 {
                     sqlCommand.Parameters.AddWithValue("@Id", id);
                     sqlConnection.Open();
