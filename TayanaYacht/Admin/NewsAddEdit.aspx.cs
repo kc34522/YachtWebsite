@@ -705,6 +705,7 @@ WHERE   (NewsID = @id)";
                 LabelFileGridView.Text = "顯示前台檔案名稱不得為空白!";
                 LabelFileGridView.ForeColor = System.Drawing.Color.Red;
                 LabelFileGridView.Visible = true;
+                return;
             }
 
 
