@@ -61,13 +61,13 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="Yachts.aspx">
+                    <a class="nav-link" href="YachtsList.aspx">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>Yachts</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="News.aspx">
+                    <a class="nav-link" href="NewsList.aspx">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>News</span>
                     </a>
@@ -87,24 +87,6 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="DealerList.aspx">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Dealers</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Contact.aspx">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Contact</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="AdminUser.aspx">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>User Management</span>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="DealerList.aspx" data-toggle="collapse" data-target="#collapseUtilities"
@@ -122,6 +104,20 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Contact.aspx">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="AdminUser.aspx">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
+
+
 
 
                 <%-- <!-- Nav Item - Utilities Collapse Menu -->
