@@ -115,7 +115,8 @@
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\NewsAddEdit.aspx" />
     <Content Include="Admin\NewsList.aspx" />
-    <Content Include="Admin\Yachts.aspx" />
+    <Content Include="Admin\YachtEdit.aspx" />
+    <Content Include="Admin\YachtsList.aspx" />
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
     <Content Include="assets\img\undraw_posting_photo.svg" />
@@ -3277,12 +3278,19 @@
     <Compile Include="Admin\NewsList.aspx.designer.cs">
       <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Yachts.aspx.cs">
-      <DependentUpon>Yachts.aspx</DependentUpon>
+    <Compile Include="Admin\YachtEdit.aspx.cs">
+      <DependentUpon>YachtEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Yachts.aspx.designer.cs">
-      <DependentUpon>Yachts.aspx</DependentUpon>
+    <Compile Include="Admin\YachtEdit.aspx.designer.cs">
+      <DependentUpon>YachtEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\YachtsList.aspx.cs">
+      <DependentUpon>YachtsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\YachtsList.aspx.designer.cs">
+      <DependentUpon>YachtsList.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -3381,6 +3389,10 @@
     <Folder Include="Upload\Dealers\" />
     <Folder Include="Upload\News\Files\" />
     <Folder Include="Upload\News\Images\" />
+    <Folder Include="Upload\Yachts\Files\" />
+    <Folder Include="Upload\Yachts\Images\Carousel\" />
+    <Folder Include="Upload\Yachts\Images\Dimension\" />
+    <Folder Include="Upload\Yachts\Images\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
