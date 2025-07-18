@@ -3153,6 +3153,10 @@
     <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="ckfinder\userfiles\.htaccess" />
+    <Content Include="UserControls\YachtSubMenu.ascx" />
+    <Content Include="Yachts_Layout.aspx" />
+    <Content Include="Yachts_OverView.aspx" />
+    <Content Include="Yachts_Specification.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -3375,12 +3379,40 @@
     <Compile Include="UserControls\RightMenu.ascx.designer.cs">
       <DependentUpon>RightMenu.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\YachtSubMenu.ascx.cs">
+      <DependentUpon>YachtSubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\YachtSubMenu.ascx.designer.cs">
+      <DependentUpon>YachtSubMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Yachts_Layout.aspx.cs">
+      <DependentUpon>Yachts_Layout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Yachts_Layout.aspx.designer.cs">
+      <DependentUpon>Yachts_Layout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Yachts_OverView.aspx.cs">
+      <DependentUpon>Yachts_OverView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Yachts_OverView.aspx.designer.cs">
+      <DependentUpon>Yachts_OverView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Yachts_Specification.aspx.cs">
+      <DependentUpon>Yachts_Specification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Yachts_Specification.aspx.designer.cs">
+      <DependentUpon>Yachts_Specification.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

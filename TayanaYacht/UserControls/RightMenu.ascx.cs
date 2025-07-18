@@ -30,7 +30,9 @@ namespace TayanaYacht.UserControls
         {
             switch (page)
             {
-                case "yachts": return "Yachts";
+                case "yachts_overview": return "Yachts";
+                case "yachts_layout": return "Yachts";
+                case "yachts_specification": return "Yachts";
                 case "newslist": return "News";
                 case "newsdetail": return "News";
                 case "company": return "Company";
@@ -55,18 +57,16 @@ namespace TayanaYacht.UserControls
             switch (menuType)
             {
                 case "Yachts":
-                    items.Add(new MenuItem { Url = "Yachts.aspx", Text = "Yachts" });
+                    items.Add(new MenuItem { Url = "#", Text = "Yachts" });
                     // TODO: 從資料庫取得 Model 名稱
 
                     if (!string.IsNullOrWhiteSpace(id))
                     {
-                        //SqlConnection sqlConnection = new SqlConnection();
-                        items.Add(new MenuItem { Url = "#", Text = "#" });
+                        items.Add(new MenuItem { Url = "#", Text = GetYachtName(Convert.ToInt32(id)) });
                     }
                     else
                     {
-                        //SqlConnection sqlConnection = new SqlConnection();
-                        items.Add(new MenuItem { Url = "#", Text = "#" });
+                        items.Add(new MenuItem { Url = "#", Text = GetYachtName(GetFirstYachtId()) });
                     }
 
                     break;
@@ -125,7 +125,7 @@ namespace TayanaYacht.UserControls
             public string Text { get; set; }
         }
 
-        // 
+        // 麵包削
         protected void RepeaterRightMenu_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             // 表示 一般資料列，在偶數或奇數位置都會出現
@@ -181,6 +181,44 @@ namespace TayanaYacht.UserControls
                 }
             }
             return countryId;
+        }
+
+        // 抓左側選單第一個Yacht Id
+        private int GetFirstYachtId()
+        {
+            int yachtId;
+            string sql = @"SELECT Top 1  YachtID
+FROM     Yachts
+WHERE   (IsActive = 1)
+ORDER BY ModelName";
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                {
+                    sqlConnection.Open();
+                    yachtId = (int)sqlCommand.ExecuteScalar();
+                }
+            }
+            return yachtId;
+        }
+
+        // 抓YACHT NAME
+        private string GetYachtName(int yachtId)
+        {
+            string yachtName;
+            string sql = @"SELECT   ModelName
+FROM     Yachts
+WHERE   (YachtID = @YachtID)";
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@YachtID", yachtId);
+                    sqlConnection.Open();
+                    yachtName = sqlCommand.ExecuteScalar().ToString();
+                }
+            }
+            return yachtName;
         }
     }
 }
