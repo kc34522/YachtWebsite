@@ -29,7 +29,7 @@
             <!--------------------------------選單開始---------------------------------------------------->
             <div class="menu">
                 <ul>
-                    <li class="menuli01"><a href="#">Yachts</a></li>
+                    <li class="menuli01"><a href="/Yachts_OverView.aspx">Yachts</a></li>
                     <li class="menuli02"><a href="/NewsList.aspx">NEWS</a></li>
                     <li class="menuli03"><a href="/Company.aspx">COMPANY</a></li>
                     <li class="menuli04"><a href="/Dealers.aspx">DEALERS</a></li>
@@ -100,6 +100,16 @@
             });
         });
     </script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Front_Assets/Scripts/jquery.ad-gallery.js") %>"></script>
+  <script type="text/javascript">
+      $(function () {
 
+          var galleries = $('.ad-gallery').adGallery();
+          galleries[0].settings.effect = 'slide-hori';
+
+
+
+      });
+  </script>
 </body>
 </html>
