@@ -833,6 +833,7 @@ body {
     text-align: right;
     padding-top: 20px;
     float: right;
+    cursor:pointer;
 }
 
 .clear {

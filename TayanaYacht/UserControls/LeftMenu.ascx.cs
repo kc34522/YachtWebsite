@@ -26,7 +26,7 @@ namespace TayanaYacht
                 string menuType = GetMenuType(page);
                 LoadMenu(menuType);
             }
-          
+
 
         }
 
@@ -34,13 +34,15 @@ namespace TayanaYacht
         {
             switch (page)
             {
-                case "yachts": return "Yachts";
+                case "yachts_overview": return "Yachts1";
+                case "yachts_layout": return "Yachts2";
+                case "yachts_specification": return "Yachts3";
                 case "newslist": return "News";
                 case "newsdetail": return "News";
                 case "company": return "Company";
                 case "dealers": return "Dealers";
                 case "contact": return "Contact";
-                default: return ""; 
+                default: return "";
             }
         }
 
@@ -52,13 +54,77 @@ namespace TayanaYacht
             List<MenuItem> items = new List<MenuItem>();
             switch (menuType)
             {
-                case "Yachts":
+                case "Yachts1":
                     TitleText = "YACHTS";
+                    string yachtSql = @"SELECT   ModelName, YachtID, IsNewBuilding, IsNewDesign
+
+                                    FROM     Yachts
+                                    WHERE   (IsActive = 1)
+                                    ORDER BY ModelName";
+                    using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(yachtSql, sqlConnection))
+                        {
+                            sqlConnection.Open();
+                            using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                            {
+                                while (sqlDataReader.Read())
+                                {
+                                    items.Add(new MenuItem { Url = $"Yachts_OverView.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"])?" (New Building)":"") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "")});
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case "Yachts2":
+                    TitleText = "YACHTS";
+                    string yachtSql2 = @"SELECT   ModelName, YachtID, IsNewBuilding, IsNewDesign
+
+                                    FROM     Yachts
+                                    WHERE   (IsActive = 1)
+                                    ORDER BY ModelName";
+                    using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(yachtSql2, sqlConnection))
+                        {
+                            sqlConnection.Open();
+                            using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                            {
+                                while (sqlDataReader.Read())
+                                {
+                                    items.Add(new MenuItem { Url = $"Yachts_Layout.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"]) ? " (New Building)" : "") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "") });
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case "Yachts3":
+                    TitleText = "YACHTS";
+                    string yachtSql3 = @"SELECT   ModelName, YachtID, IsNewBuilding, IsNewDesign
+
+                                    FROM     Yachts
+                                    WHERE   (IsActive = 1)
+                                    ORDER BY ModelName";
+                    using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand(yachtSql3, sqlConnection))
+                        {
+                            sqlConnection.Open();
+                            using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                            {
+                                while (sqlDataReader.Read())
+                                {
+                                    items.Add(new MenuItem { Url = $"Yachts_Layout.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"]) ? " (New Building)" : "") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "") });
+                                }
+                            }
+                        }
+                    }
                     break;
 
                 case "News":
                     TitleText = "NEWS";
-                    items.Add(new MenuItem { Url = "NewsList.aspx", Text= "News & Events" });
+                    items.Add(new MenuItem { Url = "NewsList.aspx", Text = "News & Events" });
                     break;
 
                 case "Company":
@@ -96,7 +162,7 @@ namespace TayanaYacht
                     items.Add(new MenuItem { Url = "#", Text = "Contact" });
                     break;
 
-                //default:
+                    //default:
             }
 
             RepeaterLeftMenu.DataSource = items;
