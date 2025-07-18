@@ -29,9 +29,19 @@ namespace TayanaYacht.UserControls
             string id = Request.QueryString["Id"];
             switch (menuType)
             {
-                case "yachts":
-                    ContentTitle = "XXX";
-                    //SqlConnection sqlConnection = new SqlConnection();
+                case "yachts_overview":
+                case "yachts_layout":
+                case "yachts_specification":
+                    int yachtId;
+                    if (!string.IsNullOrWhiteSpace(Request.QueryString["id"]) && int.TryParse(Request.QueryString["id"], out yachtId))
+                    {
+                        ContentTitle = GetYachtName(yachtId);
+                    }
+                    else
+                    {
+                        yachtId = GetFirstYachtId();
+                        ContentTitle = GetYachtName(yachtId);
+                    }
                     break;
 
                 case "newslist":
@@ -116,6 +126,45 @@ namespace TayanaYacht.UserControls
             }
             return countryId;
         }
+
+        // 抓左側選單第一個Yacht Id
+        private int GetFirstYachtId()
+        {
+            int yachtId;
+            string sql = @"SELECT Top 1  YachtID
+FROM     Yachts
+WHERE   (IsActive = 1)
+ORDER BY ModelName";
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                {
+                    sqlConnection.Open();
+                    yachtId = (int)sqlCommand.ExecuteScalar();
+                }
+            }
+            return yachtId;
+        }
+
+        // 抓YACHT NAME
+        private string GetYachtName(int yachtId)
+        {
+            string yachtName;
+            string sql = @"SELECT   ModelName
+FROM     Yachts
+WHERE   (YachtID = @YachtID)";
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            {
+                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@YachtID", yachtId);
+                    sqlConnection.Open();
+                    yachtName = sqlCommand.ExecuteScalar().ToString();
+                }
+            }
+            return yachtName;
+        }
+
 
     }
 }
