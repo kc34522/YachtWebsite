@@ -2497,6 +2497,7 @@
     <Content Include="Front_Assets\images\default1.jpg" />
     <Content Include="Front_Assets\images\default2.jpg" />
     <Content Include="Front_Assets\images\downloads.gif" />
+    <Content Include="Front_Assets\images\favicon.ico" />
     <Content Include="Front_Assets\images\footer.jpg" />
     <Content Include="Front_Assets\images\i001.jpg" />
     <Content Include="Front_Assets\images\i002.jpg" />
@@ -2520,6 +2521,7 @@
     <Content Include="Front_Assets\images\images\menu_y2_06.jpg" />
     <Content Include="Front_Assets\images\lefttop.gif" />
     <Content Include="Front_Assets\images\loader.gif" />
+    <Content Include="Front_Assets\images\logo001.gif" />
     <Content Include="Front_Assets\images\menu.gif" />
     <Content Include="Front_Assets\images\menu1_03.gif" />
     <Content Include="Front_Assets\images\menu1_04.gif" />
@@ -2591,6 +2593,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Index.aspx" />
     <Content Include="NewsDetail.aspx" />
     <Content Include="NewsList.aspx" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
@@ -3328,6 +3331,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="NewsDetail.aspx.cs">
       <DependentUpon>NewsDetail.aspx</DependentUpon>
