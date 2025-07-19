@@ -135,12 +135,16 @@ namespace TayanaYacht.UserControls
                 var ltlMenuItem = (Literal)e.Item.FindControl("ltlMenuItem");
                 var ltlArrow = (Literal)e.Item.FindControl("ltlArrow");
 
-                ltlMenuItem.Text = $"<a href='{menuItem.Url}'>{menuItem.Text}</a>";
 
                 // 如果不是最後一筆，顯示 >>
                 if (e.Item.ItemIndex < totalItemCount - 1)
                 {
+                    ltlMenuItem.Text = $"<a href='{menuItem.Url}'>{menuItem.Text}</a>";
                     ltlArrow.Text = " &gt;&gt; ";
+                }
+                else
+                {
+                    ltlMenuItem.Text = $"<a href='{menuItem.Url}' style='color: #00b4e7;'>{menuItem.Text}</a>";
                 }
             }
         }

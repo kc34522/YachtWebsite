@@ -1,7 +1,12 @@
 ﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="TayanaYacht.Contact" %>
 
+<%@ Register Assembly="Recaptcha.Web" Namespace="Recaptcha.Web.UI.Controls" TagPrefix="cc1" %>
+<asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
+    <link href="<%= ResolveUrl("~/Front_Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="bannerMask" runat="server">
-    <img src="<%= ResolveUrl("~/Assets/images/contact.jpg") %>" alt="&quot;&quot;" width="967" height="371" />
+    <img src="<%= ResolveUrl("~/Front_Assets/images/contact.jpg") %>" alt="&quot;&quot;" width="967" height="371" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bannerSmall" runat="server">
 </asp:Content>
@@ -9,7 +14,7 @@
     <div class="banner">
         <ul>
             <li>
-                <img src="<%= ResolveUrl("~/Assets/images/newbanner.jpg") %>" alt="Tayana Yachts" /></li>
+                <img src="<%= ResolveUrl("~/Front_Assets/images/newbanner.jpg") %>" alt="Tayana Yachts" /></li>
         </ul>
     </div>
 </asp:Content>
@@ -27,19 +32,19 @@
             <tr>
                 <td class="from01td01">Name :</td>
                 <td><span>*</span><asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
-                    <asp:Label ID="LabelName" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
+                    <asp:Label ID="LabelName" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td class="from01td01">Email :</td>
                 <td><span>*</span><asp:TextBox ID="TextBoxEmail" runat="server" TextMode="Email"></asp:TextBox>
-                    <asp:Label ID="LabelEmail" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="LabelEmail" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td class="from01td01">Phone :</td>
                 <td><span>*</span><asp:TextBox ID="TextBoxPhone" runat="server"></asp:TextBox>
-                    <asp:Label ID="LabelPhone" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="LabelPhone" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -63,20 +68,20 @@
                     <asp:TextBox ID="TextBoxComments" runat="server" Columns="45" Rows="5" TextMode="MultiLine"></asp:TextBox>
                 </td>
             </tr>
-
-            <!-- 待做:驗證碼圖片 -->
-            <%-- <tr>
+            <tr>
                 <td class="from01td01">&nbsp;</td>
                 <td class="f_right">
-                    <img src="/web/20170914183146im_/http://www.tayanaworld.com/JpegImage.ashx" id="ctl00_ContentPlaceHolder1_imgMVcode" style="padding-right: 8px" align="middle" alt="Please enter the verification code" border="0" title="Please enter the verification code" />
-                    <input name="ctl00$ContentPlaceHolder1$txtVCode" type="text" value="Please enter the verification code" id="ctl00_ContentPlaceHolder1_txtVCode" onblur="javascript: if(this.value=='')  this.value='Please enter the verification code';" onfocus="javascript: if(this.value=='Please enter the verification code') this.value='';" />
+                    <cc1:RecaptchaWidget ID="RecaptchaWidget1" runat="server" />
+                        <asp:Label ID="LabelRecaptcha" runat="server" ForeColor="Red" ></asp:Label>
                 </td>
-            </tr>--%>
+            </tr>
 
             <tr>
                 <td class="from01td01">&nbsp;</td>
                 <td class="f_right">
-                    <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="submit" Width="59" Height="25" ImageUrl="~/Assets/images/buttom03.gif" OnClick="ImageButton1_Click" />
+                    <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="submit" Width="59" Height="25" ImageUrl="~/Front_Assets/images/buttom03.gif" OnClick="ImageButton1_Click" />
+                    <br />
+                    <asp:Label ID="LabelSubmit" runat="server" ></asp:Label>
                 </td>
             </tr>
         </table>
@@ -111,7 +116,7 @@ If you have any questions about our yachts or would like to take your interest a
     <div class="box4">
         <h4>Location</h4>
         <p>
-            <iframe width="695" height="518" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=d&amp;source=s_d&amp;saddr=%E5%8F%B0%E7%81%A3%E9%AB%98%E9%9B%84%E5%B8%82%E5%B0%8F%E6%B8%AF%E5%8D%80%E4%B8%AD%E5%B1%B1%E5%9B%9B%E8%B7%AF%E9%AB%98%E9%9B%84%E5%B0%8F%E6%B8%AF%E6%A9%9F%E5%A0%B4&amp;daddr=%E5%8F%B0%E7%81%A3%E9%AB%98%E9%9B%84%E5%B8%82%E6%9E%97%E5%9C%92%E5%8D%80%E4%B8%AD%E9%96%80%E6%9D%91%E6%B5%B7%E5%A2%98%E8%B7%AF%EF%BC%96%EF%BC%90%E8%99%9F&amp;hl=zh-en&amp;geocode=FRthWAEdwlwsByGxkQ4S1t-ckinNS9aM0xxuNDELEXJZh6Soqg%3BFRRmVwEdMKssBym5azbzl-JxNDGd62mwtzGaDw&amp;aq=0&amp;oq=%E9%AB%98%E9%9B%84%E5%B0%8F%E6%B8%AF%E6%A9%9F&amp;sll=22.50498,120.36792&amp;sspn=0.008356,0.016512&amp;g=%E5%8F%B0%E7%81%A3%E9%AB%98%E9%9B%84%E5%B8%82%E6%9E%97%E5%9C%92%E5%8D%80%E4%B8%AD%E9%96%80%E6%9D%91%E6%B5%B7%E5%A2%98%E8%B7%AF%EF%BC%96%EF%BC%90%E8%99%9F&amp;mra=ls&amp;ie=UTF8&amp;t=m&amp;ll=22.537135,120.360718&amp;spn=0.08213,0.119133&amp;z=13&amp;output=embed"></iframe>
+            <iframe width="695" height="518" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.9791343917445!2d120.36291278285873!3d22.504966026785095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3471e297f2453fc9%3A0xb4400b87cbf2aa95!2zODMy6auY6ZuE5biC5p6X5ZyS5Y2A5rW35aKY6LevNjDomZ8!5e0!3m2!1szh-TW!2stw!4v1752922425334!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </p>
 
     </div>
