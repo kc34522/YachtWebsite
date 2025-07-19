@@ -840,3 +840,9 @@ body {
     clear: both;
     width: 100%;
 }
+
+#logol {
+    position: absolute;
+    top: 23px;
+    left: 0px;
+}

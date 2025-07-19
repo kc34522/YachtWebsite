@@ -96,6 +96,24 @@ namespace TayanaYacht
         protected global::System.Web.UI.WebControls.TextBox TextBoxComments;
 
         /// <summary>
+        /// RecaptchaWidget1 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::Recaptcha.Web.UI.Controls.RecaptchaWidget RecaptchaWidget1;
+
+        /// <summary>
+        /// LabelRecaptcha 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelRecaptcha;
+
+        /// <summary>
         /// ImageButton1 控制項。
         /// </summary>
         /// <remarks>
@@ -103,5 +121,14 @@ namespace TayanaYacht
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+
+        /// <summary>
+        /// LabelSubmit 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelSubmit;
     }
 }

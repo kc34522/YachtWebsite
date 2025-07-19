@@ -12,7 +12,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %></title>
-   <%-- <link href="<%= ResolveUrl("~/Front_Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="<%= ResolveUrl("~/Front_Assets/images/favicon.ico") %>" />
+    <%-- <link href="<%= ResolveUrl("~/Front_Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%= ResolveUrl("~/Front_Assets/css/style.css") %>" rel="stylesheet" type="text/css" />--%>
     <link href="<%= ResolveUrl("~/Front_Assets/css/reset.css") %>" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="ContentPlaceHolderHead" runat="server"></asp:ContentPlaceHolder>
@@ -27,6 +28,11 @@
             </div>
 
             <!--------------------------------選單開始---------------------------------------------------->
+            <div id="logol">
+                <a href="Index.aspx">
+                    <img src="Front_Assets/images/logo001.gif" />
+                    <%--<img src='<%# ResolveUrl("~/Front_Assets/images/logo001.gif") %>' alt="Tayana" />--%></a>
+            </div>
             <div class="menu">
                 <ul>
                     <li class="menuli01"><a href="/Yachts_OverView.aspx">Yachts</a></li>
@@ -101,15 +107,15 @@
         });
     </script>
     <script type="text/javascript" src="<%= ResolveUrl("~/Front_Assets/Scripts/jquery.ad-gallery.js") %>"></script>
-  <script type="text/javascript">
-      $(function () {
+    <script type="text/javascript">
+        $(function () {
 
-          var galleries = $('.ad-gallery').adGallery();
-          galleries[0].settings.effect = 'slide-hori';
+            var galleries = $('.ad-gallery').adGallery();
+            galleries[0].settings.effect = 'slide-hori';
 
 
 
-      });
-  </script>
+        });
+    </script>
 </body>
 </html>
