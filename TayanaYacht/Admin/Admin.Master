@@ -111,7 +111,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="AdminUser.aspx">
+                    <a class="nav-link" href="Users.aspx">
                         <i class="fas fa-fw fa-cog"></i>
                         <span>User Management</span>
                     </a>
@@ -802,7 +802,7 @@
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <%--須加按鈕後製程式碼--%>
-                        <asp:Button ID="ButtonLogout" runat="server" Text="Logout" CssClass="btn btn-primary" />
+                        <asp:Button ID="ButtonLogout" runat="server" Text="Logout" CssClass="btn btn-primary" OnClick="ButtonLogout_Click" />
                     </div>
                 </div>
             </div>

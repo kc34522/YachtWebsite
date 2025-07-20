@@ -58,7 +58,7 @@ namespace TayanaYacht.Admin
                         if (sqlDataReader.Read())
                         {
                             userId = sqlDataReader["Id"].ToString();
-                            hashedPassword = sqlDataReader["PassordHash"].ToString();
+                            hashedPassword = sqlDataReader["PasswordHash"].ToString();
                             displayName = sqlDataReader["DisplayName"].ToString();
                             userRole = sqlDataReader["Role"].ToString();
                         }
@@ -77,7 +77,7 @@ namespace TayanaYacht.Admin
                             // session只需存userId, 其他是多餘的, 因為userId有值就代表login是true, userId也能透過id搜尋, 只要登出就給它NULL
                             Session["AdminId"] = userId;
                             Session["AdminName"] = displayName;
-                            Session["Role"] = userRole;
+                            Session["AdminRole"] = userRole;
 
                             Response.Redirect("YachtsList.aspx");
                         }
