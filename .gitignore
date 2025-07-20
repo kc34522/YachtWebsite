@@ -63,3 +63,5 @@ HashGenerator/
 
 # 團隊若不想共用執行設定，可以取消下面這行的註解
 # Properties/launchSettings.json
+
+/replacements.txt
