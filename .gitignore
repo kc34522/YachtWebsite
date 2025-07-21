@@ -1,53 +1,67 @@
 ##################################
-# Visual Studio 類專案忽略規則
+# Visual Studio / .NET 忽略規則
 ##################################
 
-## User-specific files
-*.rsuser
+# User-specific files
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+*.rsuser
 
-## Build results
-bin/
-obj/
+# Build results
+[Bb]in/
+[Oo]bj/
 [Bb]uild/
 [Rr]elease/
 [Dd]ebug/
 *.log
+*.tmp
+*.bak
+*.cache
 
-## VS temporary folders
+# Visual Studio temporary folders
 .vs/
 
-## SQL Server LocalDB database files
+# NuGet & Packages
+## 這是最重要的部分：忽略所有 packages 資料夾。
+## 專案的相依套件應該透過 packages.config 或 .csproj 檔案還原。
+**/[Pp]ackages/
+*.nupkg
+*.snupkg
+
+# SQL Server LocalDB database files
 *.mdf
 *.ldf
 
-## Entity Framework model backup
+# Entity Framework
 *.edmx.diagram
 *.edmx.sql
 
-## IIS Express 設定檔
+# IIS Express & VS Code
 .vscode/
 .vsconfig
 *.iisexpress
 *.vspscc
 *.vssscc
 
-## Others
-*.dbmdl
-*.cache
-*.tmp
-_ReSharper*/              # JetBrains 插件產物
-*.ncrunch*                # 測試工具產物
-*.dotCover                # 測試覆蓋率工具
-*.orig                    # 合併衝突殘留檔案
-*.bak                     # 備份檔
+# Rider IDE
+.idea/
 
-# npm / yarn 如果前端有用到
+# 其它工具與殘留檔案
+_ReSharper*/
+*.ncrunch*
+*.dotCover
+*.orig
+*.dbmdl
+
+# 前端相依套件 (若有使用)
 node_modules/
 
-# 團隊不要上傳個人設定的話，也可以忽略 launchSettings.json
+# 你自己新增的專案資料夾 (請確保沒有打錯字或奇怪的空格)
+HashGenerator/
+
+# 團隊若不想共用執行設定，可以取消下面這行的註解
 # Properties/launchSettings.json
 
+/replacements.txt

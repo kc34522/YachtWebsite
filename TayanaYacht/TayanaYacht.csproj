@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,25 +44,53 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
       <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CKEditor.NET, Version=3.6.4.0, Culture=neutral, PublicKeyToken=e379cdf2f8354999, processorArchitecture=MSIL">
       <HintPath>..\packages\CkeditorForASP.NET.3.6.4.0\lib\CKEditor.NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ScriptManager.MSAjax, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Recaptcha.Web, Version=3.1.0.0, Culture=neutral, PublicKeyToken=c11b6c0ad947566e, processorArchitecture=MSIL">
       <HintPath>..\packages\RecaptchaNet.3.1.0\lib\net45\Recaptcha.Web.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -70,6 +99,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -77,25 +107,32 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -111,47 +148,28 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ScriptManager.MSAjax">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ScriptManager.WebForms">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="WebGrease">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.FriendlyUrls">
-      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\AboutUs.aspx" />
-    <Content Include="Admin\AdminUser.aspx" />
     <Content Include="Admin\Certificate.aspx" />
     <Content Include="Admin\Contact.aspx" />
     <Content Include="Admin\CountryRegionManage.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\DealerCreate.aspx" />
-    <Content Include="Admin\DealerList.aspx" />
     <Content Include="Admin\DealerEdit.aspx" />
+    <Content Include="Admin\DealerList.aspx" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\NewsAddEdit.aspx" />
     <Content Include="Admin\NewsList.aspx" />
+    <Content Include="Admin\Users.aspx" />
     <Content Include="Admin\YachtEdit.aspx" />
     <Content Include="Admin\YachtsList.aspx" />
     <Content Include="assets\css\sb-admin-2.css" />
@@ -1838,6 +1856,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="ckfinder\bin\Debug\CKFinder.dll" />
     <Content Include="ckfinder\bin\Debug\CKFinder.pdb" />
     <Content Include="ckfinder\bin\Debug\CKFinder_FileEditor.dll" />
     <Content Include="ckfinder\bin\Debug\CKFinder_FileEditor.pdb" />
@@ -2482,7 +2501,25 @@
     <Content Include="ckfinder\skins\v1\skin.js" />
     <Content Include="ckfinder\skins\v1\uipanel.css" />
     <Content Include="ckfinder\translations.txt" />
+    <Content Include="ckfinder\userfiles\images\0a2cef3715bb65f8fbb761cc56c9c53d_t.jpeg" />
+    <Content Include="ckfinder\userfiles\_thumbs\Images\0a2cef3715bb65f8fbb761cc56c9c53d_t.jpeg" />
     <Content Include="Company.aspx" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Dealers.aspx" />
     <Content Include="Front_Assets\css\csshover.htc" />
     <Content Include="Front_Assets\css\homestyle.css" />
@@ -2519,6 +2556,14 @@
     <Content Include="Front_Assets\images\buttom02.gif" />
     <Content Include="Front_Assets\images\buttom03.gif" />
     <Content Include="Front_Assets\images\buttright.gif" />
+    <Content Include="Front_Assets\images\certificat001.jpg" />
+    <Content Include="Front_Assets\images\certificat002.jpg" />
+    <Content Include="Front_Assets\images\certificat003.jpg" />
+    <Content Include="Front_Assets\images\certificat004.jpg" />
+    <Content Include="Front_Assets\images\certificat005.jpg" />
+    <Content Include="Front_Assets\images\certificat006.jpg" />
+    <Content Include="Front_Assets\images\certificat007.jpg" />
+    <Content Include="Front_Assets\images\certificat008.jpg" />
     <Content Include="Front_Assets\images\changbg.gif" />
     <Content Include="Front_Assets\images\changbg.png" />
     <Content Include="Front_Assets\images\changbg1.gif" />
@@ -2580,6 +2625,7 @@
     <Content Include="Front_Assets\images\menu_y2_05.jpg" />
     <Content Include="Front_Assets\images\menu_y2_06.jpg" />
     <Content Include="Front_Assets\images\new01.png" />
+    <Content Include="Front_Assets\images\new02.png" />
     <Content Include="Front_Assets\images\newbanner.jpg" />
     <Content Include="Front_Assets\images\news.gif" />
     <Content Include="Front_Assets\images\new_top01.png" />
@@ -2611,22 +2657,6 @@
     <Content Include="Front_Assets\Scripts\jquery.min.js" />
     <Content Include="Front_Assets\Scripts\jquery.timers.js" />
     <Content Include="Contact.aspx" />
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -2634,7 +2664,19 @@
     <Content Include="Index.aspx" />
     <Content Include="NewsDetail.aspx" />
     <Content Include="NewsList.aspx" />
+    <Content Include="ckfinder\plugins\fileeditor\codemirror\LICENSE" />
+    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ckfinder\userfiles\.htaccess" />
     <Content Include="RecaptchaNet.Readme.txt" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\CHANGES.html" />
     <Content Include="Scripts\ckeditor\ckeditor.asp" />
@@ -2979,35 +3021,108 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="UserControls\YachtSubMenu.ascx" />
+    <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Yachts_Layout.aspx" />
+    <Content Include="Yachts_OverView.aspx" />
+    <Content Include="Yachts_Specification.aspx" />
+    <Content Include="Upload\Dealers\12663cba-9950-424d-a841-d76aec385054.jpeg" />
+    <Content Include="Upload\Dealers\3b74d822-1977-49c5-9bdd-51a556a2264d.jpeg" />
+    <Content Include="Upload\Dealers\71002977-0cc9-44a2-9868-74bd01302dae.jpeg" />
+    <Content Include="Upload\Dealers\813d22e2-b719-4367-86c0-eb6cfdb5852c.jpeg" />
+    <Content Include="Upload\Dealers\840d8bfc-b5ce-44b8-82d1-63dfd3924328.jpeg" />
+    <Content Include="Upload\Dealers\a6f990ed-f98a-484c-8de9-019ac44c06d5.jpeg" />
+    <Content Include="Upload\Dealers\e04c3132-fd96-4a8e-8e70-d7be1afbb116.jpeg" />
+    <Content Include="Upload\News\Images\0789b6dc-7e23-4128-b05d-0849a8c18524.jpg" />
+    <Content Include="Upload\News\Images\1368eca7-95bd-49fa-9496-f26388d3caad.jpg" />
+    <Content Include="Upload\News\Images\13908822-5a13-4859-9914-73a1cdcd678c.jpg" />
+    <Content Include="Upload\News\Images\1522ee50-3aeb-4b71-9616-f0984c8a017a.jpg" />
+    <Content Include="Upload\News\Images\17f4b53b-aeb0-40d4-869c-c32fd44bf2ca.jpg" />
+    <Content Include="Upload\News\Images\1d5ef99a-373f-4fa4-85ba-3c785e9c0b6b.jpg" />
+    <Content Include="Upload\News\Images\33d9875e-e5d3-4dc9-aa04-6dff57074189.jpg" />
+    <Content Include="Upload\News\Images\37d6e666-eba9-483a-ac54-c7f5a611f4e1.jpg" />
+    <Content Include="Upload\News\Images\46a47996-18bf-4fad-aab3-ab36679ca046.jpg" />
+    <Content Include="Upload\News\Images\5391a4b0-0906-4899-8065-72c01d9a9d62.jpg" />
+    <Content Include="Upload\News\Images\700214bc-c64b-4974-93df-89971ee19582.jpg" />
+    <Content Include="Upload\News\Images\7e9c793e-901c-496b-b38a-6b6fafb4ab2f.jpg" />
+    <Content Include="Upload\News\Images\c183a483-601e-43b2-b740-4908f3142d7e.jpg" />
+    <Content Include="Upload\News\Images\f6a42ba4-edfb-4ef7-b3d4-b1a718b7a318.jpg" />
+    <Content Include="Upload\Yachts\Files\5e5ad376-5e6a-4bd1-b2d9-813a39b49e96.txt" />
+    <Content Include="Upload\Yachts\Images\Carousel\1dd78bc1-8a87-47a3-b056-47f6d385a126.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\1f597247-32ce-40a8-8541-3cf86ca19c44.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\253c74d4-d5f5-40ee-908d-89209c942ff5.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\271bf9f6-e69a-4f20-9f75-961d2142c35f.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\282e5e92-7070-4796-9e15-2c399eb779be.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\2f5e9922-16f0-4c1b-bb3f-662c001455c6.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\33b8053a-3b91-4542-a50a-8e4dc00ff443.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\36d6e0af-0ac0-4124-964e-d0a0e51f5603.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\435316db-0326-497e-8918-96977fec87f8.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\50686f69-7e43-43e5-8a6e-5ffd2279bc1a.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\5b5c6f19-a5e0-4185-b1c8-d0ebd0fb0980.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\5ea18ce3-717e-4de2-8d2d-888bdad8dc8f.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\70e6ee10-2929-472d-8c49-0076b273f899.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\9f29d8a2-cc6d-42f3-a59c-e8debfe17d1d.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\a1da8539-4ebf-42a2-8a10-efa7bd31207b.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\a3d9d16d-23dc-460f-86c0-7d7b5d4a4976.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\b26b185f-e43a-4958-8261-356d16f56d5f.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\be097476-5e2a-414c-b8a1-9b560136ea0f.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\c564c181-fc2b-410b-ad5c-675aa44b27d5.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\c7528f8e-d15c-4d5c-9f90-f33469130870.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\cf1965c1-f4ea-414e-adda-1fb42beff0eb.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\d6d3cf0a-62d2-45ba-a36e-5baab08861ea.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\e1110675-f24d-49e6-924c-c67b49f7e55a.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\e3f76a01-8a8a-4c61-9c2a-61d2602ddda3.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\eda6bbdf-c719-4093-b196-426381b36092.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\f0bf7039-f634-4ffd-83f4-8c9df54c2468.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\f1a74def-03f5-447f-99c1-d0ce1d20a044.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\f22489a5-f0e9-42da-9c09-fb06dcc773b3.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\fb3762b5-16fe-4473-9614-d07fc80d90c8.jpg" />
+    <Content Include="Upload\Yachts\Images\Carousel\fc174f35-da79-445b-aabe-f0bdcc2666ad.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\2361bcc8-3375-4de7-9ea8-5fd8f5ecb1e3.jpeg" />
+    <Content Include="Upload\Yachts\Images\Dimension\8b5224ff-1fda-40e8-a468-fb21ab2586f9.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\9ee8b059-ef01-4ca2-b9ad-990aab4b2bff.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\9fb3cfe1-0ee7-4cea-b822-93705e4aeaa9.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\9fcf60ec-b484-427d-8ee6-9c41c74bda11.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\a7720ed1-40a7-44bb-ac9f-971c0bb96dd9.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\b71ccefe-2f32-4707-b93d-e8938c95b045.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\df61c802-be3e-428c-9f69-1158f4a03533.jpg" />
+    <Content Include="Upload\Yachts\Images\Dimension\f2e73b01-a6c1-45a2-8e0d-34dd6a1a59dc.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\0f89557f-d24b-482a-bc0c-83cee1c2a0ec.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\39f623c6-edf1-45c9-9de0-984e70c46b00.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\3d40c269-7753-418b-9df4-4177167916ee.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\71a19eb0-4089-4c55-826e-b2b4b6742875.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\79bca845-779c-46bc-af6d-ea374357efec.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\d39d5b04-3070-41ce-968f-9d73cc66198d.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\e0e30e31-4bce-4505-b3f3-405a576a3e7a.jpg" />
+    <Content Include="Upload\Yachts\Images\Layout\f93f6853-2435-48bc-bf0d-c62a773bdaa8.jpg" />
     <Content Include="UserControls\LeftMenu.ascx" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="Scripts\bootstrap.esm.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="UserControls\MainContentTitle.ascx" />
     <Content Include="UserControls\RightMenu.ascx" />
     <Content Include="Front_Assets\images\images\Thumbs.db" />
@@ -3185,52 +3300,9 @@
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="assets\vendor\jquery\jquery.min.map" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Scripts\ckeditor\ckeditor_php5.php" />
-    <Content Include="Scripts\ckeditor\ckeditor_php4.php" />
-    <Content Include="Scripts\ckeditor\ckeditor.php" />
-    <Content Include="Scripts\ckeditor\ckeditor.pack" />
-    <Content Include="ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="ckfinder\userfiles\.htaccess" />
-    <Content Include="UserControls\YachtSubMenu.ascx" />
-    <Content Include="Yachts_Layout.aspx" />
-    <Content Include="Yachts_OverView.aspx" />
-    <Content Include="Yachts_Specification.aspx" />
-    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.7.0.js" />
-    <Content Include="Scripts\jquery-3.7.0.min.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.js" />
-    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\WebForms\DetailsView.js" />
-    <Content Include="Scripts\WebForms\Focus.js" />
-    <Content Include="Scripts\WebForms\GridView.js" />
-    <Content Include="Scripts\WebForms\Menu.js" />
-    <Content Include="Scripts\WebForms\MenuStandards.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
-    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
-    <Content Include="Scripts\WebForms\SmartNav.js" />
-    <Content Include="Scripts\WebForms\TreeView.js" />
-    <Content Include="Scripts\WebForms\WebForms.js" />
-    <Content Include="Scripts\WebForms\WebParts.js" />
-    <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin\AboutUs.aspx.cs">
@@ -3246,13 +3318,6 @@
     </Compile>
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AdminUser.aspx.cs">
-      <DependentUpon>AdminUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AdminUser.aspx.designer.cs">
-      <DependentUpon>AdminUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Certificate.aspx.cs">
       <DependentUpon>Certificate.aspx</DependentUpon>
@@ -3289,19 +3354,19 @@
     <Compile Include="Admin\DealerCreate.aspx.designer.cs">
       <DependentUpon>DealerCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\DealerList.aspx.cs">
-      <DependentUpon>DealerList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\DealerList.aspx.designer.cs">
-      <DependentUpon>DealerList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\DealerEdit.aspx.cs">
       <DependentUpon>DealerEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\DealerEdit.aspx.designer.cs">
       <DependentUpon>DealerEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DealerList.aspx.cs">
+      <DependentUpon>DealerList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DealerList.aspx.designer.cs">
+      <DependentUpon>DealerList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -3323,6 +3388,13 @@
     </Compile>
     <Compile Include="Admin\NewsList.aspx.designer.cs">
       <DependentUpon>NewsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\YachtEdit.aspx.cs">
       <DependentUpon>YachtEdit.aspx</DependentUpon>
@@ -3392,6 +3464,13 @@
     <Compile Include="NewsList.aspx.designer.cs">
       <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Site.Mobile.Master.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.cs">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\LeftMenu.ascx.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3406,13 +3485,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MainContentTitle.ascx.cs">
       <DependentUpon>MainContentTitle.ascx</DependentUpon>
@@ -3467,18 +3539,65 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Front_Assets\images\新增資料夾\" />
-    <Folder Include="Upload\Dealers\" />
-    <Folder Include="Upload\News\Files\" />
-    <Folder Include="Upload\News\Images\" />
-    <Folder Include="Upload\Yachts\Files\" />
-    <Folder Include="Upload\Yachts\Images\Carousel\" />
-    <Folder Include="Upload\Yachts\Images\Dimension\" />
-    <Folder Include="Upload\Yachts\Images\Layout\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Upload\News\Files\1dfac19e-d9d7-4761-a22c-5f49c9263efc.pdf" />
+    <Content Include="Upload\News\Files\2730cbd6-e08b-4bd6-ba4a-0dad70978737.pdf" />
+    <Content Include="Upload\News\Files\29517c67-fd60-4e6f-9177-066fa502d22b.pdf" />
+    <Content Include="Upload\News\Files\2f5d7287-7752-4b2d-b56f-ac88eb326912.pdf" />
+    <Content Include="Upload\News\Files\370a134b-e2bc-4d02-921b-690bfd2c33ba.pdf" />
+    <Content Include="Upload\News\Files\40d1e702-ca4d-48d2-93ab-5e96e3511796.pdf" />
+    <Content Include="Upload\News\Files\55779a27-e275-43a3-a774-0fc4724b0725.pdf" />
+    <Content Include="Upload\News\Files\63d33a7b-203a-4f30-be15-0900cf8d22bb.pdf" />
+    <Content Include="Upload\News\Files\6a4fbd46-274e-4c48-8805-ed6b31f25815.pdf" />
+    <Content Include="Upload\News\Files\6ce497b5-ab50-4f8a-a69f-ea47271f8b88.pdf" />
+    <Content Include="Upload\News\Files\6d1bafa8-fe62-4e7d-989b-6d171543474e.pdf" />
+    <Content Include="Upload\News\Files\791e3cdc-8181-4a74-885e-92faeff2bbdd.pdf" />
+    <Content Include="Upload\News\Files\88b310be-f7b1-4844-8000-316ede5d7cb0.pdf" />
+    <Content Include="Upload\News\Files\8af073ae-3b77-4ebf-9a75-5d509e5a6da8.pdf" />
+    <Content Include="Upload\News\Files\a146398f-0bbe-47d3-be6d-03c6a5f9f19a.pdf" />
+    <Content Include="Upload\News\Files\b957d5fc-c48b-4a96-9673-aaca79f2992b.pdf" />
+    <Content Include="Upload\News\Files\c374204b-ad43-4180-b72e-641269df8a57.pdf" />
+    <Content Include="Upload\News\Files\cb28184c-2e8e-423a-a6a8-b77a6b1d8353.pdf" />
+    <Content Include="Upload\News\Files\df184cf3-ea4b-41a3-b992-30210ddce4c7.pdf" />
+    <Content Include="Upload\News\Files\f574ebe9-c1ec-4aec-92f2-7a8e7c1d2ad5.pdf" />
+    <Content Include="Upload\News\Files\f86f4682-9439-4497-a563-2cb1a6a6043b.pdf" />
+    <Content Include="Upload\Yachts\Files\185f06af-7703-412b-9ced-163a9241f137.pdf" />
+    <Content Include="Upload\Yachts\Files\5d7044a0-f7c3-4585-a09f-d44f7031b2f7.pdf" />
+    <Content Include="Upload\Yachts\Files\7b7539c3-3c69-4d7b-8dcf-f9b774b56672.pdf" />
+    <Content Include="Upload\Yachts\Files\96fb02e8-c8d7-4545-9bb1-8ae073af79b9.pdf" />
+    <Content Include="Upload\Yachts\Files\a0d6ca54-9741-402a-a8c7-7f8cee8d9895.pdf" />
+    <Content Include="Upload\Yachts\Files\cc6a00a3-4360-485f-9b8e-b9944fc5b041.pdf" />
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\ckeditor\ckeditor_php5.php" />
+    <Content Include="Scripts\ckeditor\ckeditor_php4.php" />
+    <Content Include="Scripts\ckeditor\ckeditor.php" />
+    <Content Include="Scripts\ckeditor\ckeditor.pack" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3511,12 +3630,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
