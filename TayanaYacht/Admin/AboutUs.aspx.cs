@@ -91,7 +91,11 @@ END
                     sqlConnection.Open();
                     sqlCommand.ExecuteNonQuery();
 
-                    LiteralMessage.Text = "儲存成功!";
+                    // --- 修改後的訊息提示 ---
+                    // 1. 讓包著訊息的整個 div 顯示出來
+                    MessageContainer.Visible = true;
+                    // 2. 設定訊息內容
+                    LiteralMessage.Text = "資料已成功儲存！";
                 }
             }
 
