@@ -30,49 +30,51 @@
         <br />
         <table>
             <tr>
-                <td class="from01td01">Name :</td>
-                <td><span>*</span><asp:TextBox ID="TextBoxName" runat="server"></asp:TextBox>
+                <td class="from01td01">
+                    <label for="TextBoxName">Name :</label>
+                </td>
+                <td><span>*</span><asp:TextBox ID="TextBoxName" runat="server" ClientIDMode="Static"></asp:TextBox>
                     <asp:Label ID="LabelName" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td class="from01td01">Email :</td>
-                <td><span>*</span><asp:TextBox ID="TextBoxEmail" runat="server" TextMode="Email"></asp:TextBox>
+                <td class="from01td01"><label for="TextBoxEmail">Email :</label></td>
+                <td><span>*</span><asp:TextBox ID="TextBoxEmail" runat="server" TextMode="Email" ClientIDMode="Static"></asp:TextBox>
                     <asp:Label ID="LabelEmail" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td class="from01td01">Phone :</td>
-                <td><span>*</span><asp:TextBox ID="TextBoxPhone" runat="server"></asp:TextBox>
+                <td class="from01td01"><label for="TextBoxPhone">Phone :</label></td>
+                <td><span>*</span><asp:TextBox ID="TextBoxPhone" runat="server" ClientIDMode="Static" TextMode="Phone"></asp:TextBox>
                     <asp:Label ID="LabelPhone" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td class="from01td01">Country :</td>
+                <td class="from01td01"><label for="DropDownListCountry">Country :</label></td>
                 <td><span>*</span>
-                    <asp:DropDownList ID="DropDownListCountry" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="DropDownListCountry" runat="server" ClientIDMode="Static"></asp:DropDownList>
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><span>*</span>Brochure of interest  *Which Brochure would you like to view?</td>
+                <td colspan="2"><span>*</span><label for="DropDownListBrochure">Brochure of interest  *Which Brochure would you like to view?</label></td>
             </tr>
             <tr>
                 <td class="from01td01">&nbsp;</td>
                 <td>
-                    <asp:DropDownList ID="DropDownListBrochure" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="DropDownListBrochure" runat="server" ClientIDMode="Static"></asp:DropDownList>
                 </td>
             </tr>
             <tr>
-                <td class="from01td01">Comments:</td>
+                <td class="from01td01"><label for="TextBoxComments">Comments :</label></td>
                 <td>
-                    <asp:TextBox ID="TextBoxComments" runat="server" Columns="45" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox ID="TextBoxComments" runat="server" Columns="60" Rows="5" TextMode="MultiLine" ClientIDMode="Static" MaxLength="500"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="from01td01">&nbsp;</td>
                 <td class="f_right">
                     <cc1:RecaptchaWidget ID="RecaptchaWidget1" runat="server" />
-                        <asp:Label ID="LabelRecaptcha" runat="server" ForeColor="Red" ></asp:Label>
+                    <asp:Label ID="LabelRecaptcha" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
 
@@ -81,7 +83,7 @@
                 <td class="f_right">
                     <asp:ImageButton ID="ImageButton1" runat="server" AlternateText="submit" Width="59" Height="25" ImageUrl="~/Front_Assets/images/buttom03.gif" OnClick="ImageButton1_Click" />
                     <br />
-                    <asp:Label ID="LabelSubmit" runat="server" ></asp:Label>
+                    <asp:Label ID="LabelSubmit" runat="server"></asp:Label>
                 </td>
             </tr>
         </table>
@@ -116,7 +118,7 @@ If you have any questions about our yachts or would like to take your interest a
     <div class="box4">
         <h4>Location</h4>
         <p>
-            <iframe width="695" height="518" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.9791343917445!2d120.36291278285873!3d22.504966026785095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3471e297f2453fc9%3A0xb4400b87cbf2aa95!2zODMy6auY6ZuE5biC5p6X5ZyS5Y2A5rW35aKY6LevNjDomZ8!5e0!3m2!1szh-TW!2stw!4v1752922425334!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe width="695" height="518" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.9791343917445!2d120.36291278285873!3d22.504966026785095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3471e297f2453fc9%3A0xb4400b87cbf2aa95!2zODMy6auY6ZuE5biC5p6X5ZyS5Y2A5rW35aKY6LevNjDomZ8!5e0!3m2!1szh-TW!2stw!4v1752922425334!5m2!1szh-TW!2stw" width="600" height="450" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </p>
 
     </div>

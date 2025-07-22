@@ -20,14 +20,9 @@ namespace TayanaYacht
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                string page = Path.GetFileName(Request.Path).ToLower();
-                string menuType = GetMenuType(page);
-                LoadMenu(menuType);
-            }
-
-
+            string page = Path.GetFileName(Request.Path).ToLower();
+            string menuType = GetMenuType(page);
+            LoadMenu(menuType);
         }
 
         private string GetMenuType(string page)
@@ -70,7 +65,7 @@ namespace TayanaYacht
                             {
                                 while (sqlDataReader.Read())
                                 {
-                                    items.Add(new MenuItem { Url = $"Yachts_OverView.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"])?" (New Building)":"") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "")});
+                                    items.Add(new MenuItem { Url = $"Yachts_OverView.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"]) ? " (New Building)" : "") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "") });
                                 }
                             }
                         }
