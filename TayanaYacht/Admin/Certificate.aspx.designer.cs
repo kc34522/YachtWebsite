@@ -15,6 +15,24 @@ namespace TayanaYacht.Admin
     {
 
         /// <summary>
+        /// MessageContainer 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MessageContainer;
+
+        /// <summary>
+        /// LiteralMessage 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LiteralMessage;
+
+        /// <summary>
         /// CKEditorControl1 控制項。
         /// </summary>
         /// <remarks>
@@ -22,15 +40,6 @@ namespace TayanaYacht.Admin
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::CKEditor.NET.CKEditorControl CKEditorControl1;
-
-        /// <summary>
-        /// ButtonSave 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSave;
 
         /// <summary>
         /// LabelLastUpdatedInfo 控制項。
@@ -42,12 +51,12 @@ namespace TayanaYacht.Admin
         protected global::System.Web.UI.WebControls.Label LabelLastUpdatedInfo;
 
         /// <summary>
-        /// LiteralMessage 控制項。
+        /// ButtonSave 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LiteralMessage;
+        protected global::System.Web.UI.WebControls.LinkButton ButtonSave;
     }
 }
