@@ -53,7 +53,7 @@ namespace TayanaYacht
                             INNER JOIN Region ON Country.Id = Region.CountryId 
                             INNER JOIN Dealer ON Dealer.RegionId = Region.Id
                             WHERE   (Dealer.IsActive = 1)
-                            ORDER BY Country.Name";
+                            ORDER BY Country.SortOrder";
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))

@@ -100,7 +100,7 @@
                             <h6 class="collapse-header">Dealers</h6>
                             <a class="collapse-item" href="DealerList.aspx">Dealer List</a>
                             <a class="collapse-item" href="DealerEdit.aspx">Add Dealer</a>
-                            <a class="collapse-item" href="CountryRegionManage.aspx">Country/Region Manage</a>
+                            <a class="collapse-item" href="CountryRegionManage.aspx">Country & Region</a>
                         </div>
                     </div>
                 </li>
@@ -426,7 +426,7 @@
                         </div>
 
                         <!-- Content Row -->
-                        <div class="row">
+                        <div class="container-fluid">
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             </asp:ContentPlaceHolder>
 

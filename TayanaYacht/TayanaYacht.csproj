@@ -163,7 +163,6 @@
     <Content Include="Admin\Contact.aspx" />
     <Content Include="Admin\CountryRegionManage.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
-    <Content Include="Admin\DealerCreate.aspx" />
     <Content Include="Admin\DealerEdit.aspx" />
     <Content Include="Admin\DealerList.aspx" />
     <Content Include="Admin\Login.aspx" />
@@ -3346,13 +3345,6 @@
     </Compile>
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\DealerCreate.aspx.cs">
-      <DependentUpon>DealerCreate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\DealerCreate.aspx.designer.cs">
-      <DependentUpon>DealerCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\DealerEdit.aspx.cs">
       <DependentUpon>DealerEdit.aspx</DependentUpon>

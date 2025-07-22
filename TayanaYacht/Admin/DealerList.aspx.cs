@@ -53,11 +53,11 @@ namespace TayanaYacht.Admin
         // 載入國家下拉選單
         private void BindCountryList()
         {
-            string sql = @"SELECT DISTINCT C.Id, C.Name
+            string sql = @"SELECT DISTINCT C.Id, C.Name, C.SortOrder
                             FROM Dealer D
                             JOIN Region R ON D.RegionId = R.Id
                             JOIN Country C ON R.CountryId = C.Id
-                            ORDER BY C.Name;";
+                            ORDER BY C.SortOrder;";
 
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
@@ -90,6 +90,7 @@ namespace TayanaYacht.Admin
             string sql = @"
                         SELECT   
                             D.Id,
+                            C.Name AS CountryName,
                             R.Name AS RegionName,
                             D.Name,
                             D.Tel, 
@@ -100,7 +101,7 @@ namespace TayanaYacht.Admin
                         JOIN Region R ON D.RegionId = R.Id
                         JOIN Country C ON R.CountryId = C.Id
                         WHERE (@countryId = 0 OR C.Id = @countryId)
-                        ORDER BY R.SortOrder, D.SortOrder";
+                        ORDER BY C.SortOrder, RegionName, D.Name";
 
 
 
@@ -125,7 +126,7 @@ namespace TayanaYacht.Admin
 
 
         // 刪除按鈕
-        protected void GridViewConctact_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void GridViewDealer_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             GridViewDealer.EditIndex = -1; // ❗先清除任何編輯狀態
 
@@ -158,5 +159,6 @@ namespace TayanaYacht.Admin
 
             LoadDealerList(); // ⚠️ 移出 using 區塊，確保連線已釋放後再執行
         }
+
     }
 }
