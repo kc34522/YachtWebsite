@@ -24,25 +24,29 @@ namespace TayanaYacht.Admin
             {
                 BindCountryList();
 
+                // --- 檢視模式 ---
                 if (Request.QueryString["Id"] != null)
                 {
-                    LabelTitle.Text = "編輯經銷商資訊";
-                    LoadDealerViewMode();
-                    LoadDealerData();
-                    PanelViewMode.Visible = true;
-                    PanelEditMode.Visible = false;
+                    LoadDealerData();                  
+
+                    // 設定卡片標題
+                    lblCardTitle.Text = "編輯經銷商資料";                    
                 }
                 else
                 {
-                    LabelTitle.Text = "新增經銷商";
-                    PanelViewMode.Visible = false;
-                    PanelEditMode.Visible = true;
-                    ButtonCancel.Visible = false;
+                    lblCardTitle.Text = "新增經銷商";
+
+                    //if (ddlCountry.Items.Count > 0)
+                    //{
+                    //    LoadRegionDropDown(Convert.ToInt32(ddlCountry.SelectedValue));
+                    //}
+
+                    // 新增模式下，不應顯示預覽圖片的控制項
+                    ImageView2.Visible = false;
                 }
-                
+
             }
             ClearMessages();
-
         }
 
         // 統一清除Label訊息
@@ -50,7 +54,6 @@ namespace TayanaYacht.Admin
         {
             LabelName.Visible = false;
             LabelImage.Visible = false;
-            LabelEditMode.Visible = false;
         }
 
         // 載入國家下拉選單
@@ -67,7 +70,6 @@ namespace TayanaYacht.Admin
                     sqlConnection.Open();
                     using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                     {
-
                         ddlCountry.DataSource = sqlDataReader;
                         ddlCountry.DataTextField = "Name";
                         ddlCountry.DataValueField = "Id";
@@ -92,52 +94,7 @@ namespace TayanaYacht.Admin
                 ddlRegion.DataBind();
             }
             //ddlRegion.Items.Insert(0, new ListItem("--請選擇地區--", "0"));
-        }
-
-        // 載入顯示模式
-        private void LoadDealerViewMode()
-        {
-            string sql = @"SELECT   Country.Name AS CountryName, Region.Name AS RegionName, Dealer.Contact, Dealer.Address, Dealer.Fax, Dealer.Cell, Dealer.Email, Dealer.Website, Dealer.ImagePath, Dealer.IsActive, Dealer.CreatedDate, 
-              Dealer.CreatedBy, Dealer.UpdatedAt, Dealer.UpdatedBy, Dealer.Name AS DealerName, Dealer.Tel
-FROM     Dealer INNER JOIN
-              Region ON Dealer.RegionId = Region.Id INNER JOIN
-              Country ON Region.CountryId = Country.Id
- WHERE   (Dealer.Id = @dealerId)";
-
-            int dealerId = Convert.ToInt32(Request.QueryString["Id"]);
-
-            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
-            {
-                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
-                {
-                    sqlCommand.Parameters.AddWithValue("@dealerId", dealerId);
-                    sqlConnection.Open();
-                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                    if (sqlDataReader.Read())
-                    {
-                        lblCountry.Text = sqlDataReader["CountryName"].ToString();
-                        lblRegion.Text = sqlDataReader["RegionName"].ToString();
-                        lblName.Text = sqlDataReader["DealerName"].ToString();
-                        lblContact.Text = sqlDataReader["Contact"].ToString();
-                        lblAddress.Text = sqlDataReader["Address"].ToString();
-                        lblTel.Text = sqlDataReader["Tel"].ToString();
-                        lblFax.Text = sqlDataReader["Fax"].ToString();
-                        lblCell.Text = sqlDataReader["Cell"].ToString();
-                        lblEmail.Text = sqlDataReader["Email"].ToString();
-                        lblWebsite.Text = sqlDataReader["Website"].ToString();
-                        ImageView.ImageUrl = sqlDataReader["ImagePath"].ToString();
-                        CheckBoxIsActive.Checked = (Boolean)sqlDataReader["IsActive"];
-                        lblCreatedDate.Text = sqlDataReader["CreatedDate"].ToString();
-                        lblCreatedBy.Text = sqlDataReader["CreatedBy"].ToString();
-                        lblUpdatedAt.Text = sqlDataReader["UpdatedAt"].ToString();
-                        lblUpdatedBy.Text = sqlDataReader["UpdatedBy"].ToString();
-
-
-                    }
-
-                }
-            }
-        }
+        }        
 
         // 載入編輯模式
         private void LoadDealerData()
@@ -173,18 +130,22 @@ FROM     Dealer INNER JOIN
                         txtEmail.Text = sqlDataReader["Email"].ToString();
                         txtWebsite.Text = sqlDataReader["Website"].ToString();
                         ImageView2.ImageUrl = sqlDataReader["ImagePath"].ToString();
-                        chkIsActive.Checked = (Boolean)sqlDataReader["IsActive"];
-                    }
+                        chkIsActive.Checked = Convert.ToBoolean(sqlDataReader["IsActive"]);
 
+                        // --- [修改] 確保圖片路徑是設定給編輯模式的 Image 控制項 (ImageView2) ---
+                        string imagePath = sqlDataReader["ImagePath"].ToString();
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            ImageView2.Visible = true;
+                            ImageView2.ImageUrl = imagePath;
+                        }
+                        else
+                        {
+                            ImageView2.Visible = false;
+                        }
+                    }
                 }
             }
-        }
-
-        // 編輯按鈕: 觸發顯示Edit Panel
-        protected void ButtonEdit_Click(object sender, EventArgs e)
-        {
-            PanelViewMode.Visible = false;
-            PanelEditMode.Visible = true;
         }
 
         // 國家下拉選單變更
@@ -205,7 +166,12 @@ FROM     Dealer INNER JOIN
                 return; // <== 終止執行，避免儲存空值
             }
 
-            string imagePath = ImageView.ImageUrl.ToString();
+            // --- [修改] 圖片路徑應從編輯模式的預覽圖 (ImageView2) 取得舊路徑 ---
+            string imagePath = "";
+            if (Request.QueryString["Id"] != null)
+            {
+                imagePath = ImageView2.ImageUrl;
+            }
 
             if (FileUploadImage.HasFile)
             {
@@ -230,16 +196,10 @@ FROM     Dealer INNER JOIN
                 FileUploadImage.SaveAs(savePath);
 
                 // 更新儲存路徑為虛擬路徑（寫入資料庫用）
-                imagePath = "~/Upload/Dealers/" + newfileName;
+                imagePath = "/Upload/Dealers/" + newfileName;
 
-            }
-
-
-            
-
-
-           
-
+            }       
+                     
             int regionId = Convert.ToInt32(ddlRegion.SelectedValue);
             string dealerName = txtName.Text;
             string contact = txtContact.Text;
@@ -273,8 +233,8 @@ WHERE(Id = @dealerId)";
                     else
                     {
                         sqlCommand.CommandText = @"INSERT INTO Dealer
-              (RegionId, Name, Contact, Address, Tel, Fax, Cell, Email, Website, ImagePath, IsActive, CreatedBy)
-VALUES  (@regionId,@dealerName,@contact,@address,@tel,@fax,@cell,@email,@website,@imagePath,@isActive,'admin')";
+              (RegionId, Name, Contact, Address, Tel, Fax, Cell, Email, Website, ImagePath, IsActive)
+VALUES  (@regionId,@dealerName,@contact,@address,@tel,@fax,@cell,@email,@website,@imagePath,@isActive)";
                     }
 
                         sqlCommand.Parameters.AddWithValue("@regionId", regionId);
@@ -294,38 +254,11 @@ VALUES  (@regionId,@dealerName,@contact,@address,@tel,@fax,@cell,@email,@website
                     sqlCommand.ExecuteNonQuery();
                 }
             }
-            LoadDealerViewMode();
-            if (Request.QueryString["Id"] != null)
-            {
-                PanelEditMode.Visible = false;
-                PanelViewMode.Visible = true;
-            }
-            else
-            {
-                LabelEditMode.Text = "儲存成功!";
-                LabelEditMode.Visible = true;
-            }
 
-            txtName.Text = "";
-            txtContact.Text = "";
-            txtAddress.Text = "";
-            txtTel.Text = "";
-            txtFax.Text = "";
-            txtCell.Text = "";
-            txtEmail.Text = "";
-            txtWebsite.Text = "";
-            ImageView2.ImageUrl = null;
-            chkIsActive.Checked = false;
+            // --- [修改] 儲存成功後，不再切換 Panel，而是直接導回列表頁，流程更順暢 ---
+            Response.Redirect("DealerList.aspx");
 
         }
-
-        // 取消按鈕: 取消編輯Edit Panel
-        protected void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            PanelEditMode.Visible = false;
-            PanelViewMode.Visible = true;
-        }
-
 
     }
 }

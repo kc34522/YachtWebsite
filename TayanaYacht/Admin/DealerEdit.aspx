@@ -1,183 +1,125 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="DealerEdit.aspx.cs" Inherits="TayanaYacht.Admin.DealerEdit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script>
+        // DOM 載入後執行
+        document.addEventListener("DOMContentLoaded", function () {
+            // 監聽 custom file input 的變動
+            var fileInput = document.querySelector('.custom-file-input');
+            if (fileInput) {
+                fileInput.addEventListener('change', function (e) {
+                    var fileName = e.target.files[0].name;
+                    var nextSibling = e.target.nextElementSibling;
+                    nextSibling.innerText = fileName;
+                });
+            }
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderH1" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:HyperLink ID="HyperLinkLastPage" runat="server" NavigateUrl="~/Admin/DealerList.aspx">回經銷商列表</asp:HyperLink>
-    <!-- 檢視模式 -->
-    <asp:Panel ID="PanelViewMode" runat="server">
-        <h3>經銷商資料檢視</h3>
-        <table>
-            <tr>
-                <td><strong>國家：</strong></td>
-                <td>
-                    <asp:Label ID="lblCountry" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>地區：</strong></td>
-                <td>
-                    <asp:Label ID="lblRegion" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>經銷商名稱：</strong></td>
-                <td>
-                    <asp:Label ID="lblName" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>聯絡人：</strong></td>
-                <td>
-                    <asp:Label ID="lblContact" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>地址：</strong></td>
-                <td>
-                    <asp:Label ID="lblAddress" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>電話：</strong></td>
-                <td>
-                    <asp:Label ID="lblTel" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>傳真：</strong></td>
-                <td>
-                    <asp:Label ID="lblFax" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>手機：</strong></td>
-                <td>
-                    <asp:Label ID="lblCell" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>Email：</strong></td>
-                <td>
-                    <asp:Label ID="lblEmail" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>網站：</strong></td>
-                <td>
-                    <asp:Label ID="lblWebsite" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>圖片路徑：</strong></td>
-                <td>
-                    <asp:Image ID="ImageView" runat="server" />
-                </td>
-            </tr>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h4 class="m-0 font-weight-bold text-primary">
+                <asp:Label ID="lblCardTitle" runat="server" Text="經銷商資料"></asp:Label>
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>國家</label>
+                        <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged" CssClass="custom-select"></asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>地區</label>
+                        <asp:DropDownList ID="ddlRegion" runat="server" CssClass="custom-select"></asp:DropDownList>
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-                <td><strong>顯示前台：</strong></td>
-                <td>
-                    <asp:CheckBox ID="CheckBoxIsActive" runat="server" Enabled="false" />
-                </td>
-            </tr>
-            <tr>
-                <td><strong>建立日期：</strong></td>
-                <td>
-                    <asp:Label ID="lblCreatedDate" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>建立者：</strong></td>
-                <td>
-                    <asp:Label ID="lblCreatedBy" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>更新時間：</strong></td>
-                <td>
-                    <asp:Label ID="lblUpdatedAt" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>更新者：</strong></td>
-                <td>
-                    <asp:Label ID="lblUpdatedBy" runat="server" /></td>
-            </tr>
-        </table>
-        <asp:Button ID="ButtonEdit" runat="server" Text="編輯" OnClick="ButtonEdit_Click" />
-    </asp:Panel>
+            <hr />
 
+            <div class="form-group">
+                <label for="<%= txtName.ClientID %>">*經銷商名稱</label>
+                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" />
+                <asp:Label ID="LabelName" runat="server" Text="" Visible="false" CssClass="text-danger small mt-1"></asp:Label>
+            </div>
+            <div class="form-group">
+                <label for="<%= txtContact.ClientID %>">聯絡人</label>
+                <asp:TextBox ID="txtContact" runat="server" CssClass="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="<%= txtAddress.ClientID %>">地址</label>
+                <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" />
+            </div>
 
-    <!-- 編輯模式 -->
-    <asp:Label ID="LabelEditMode" runat="server" Text="" Visible="false"></asp:Label>
-    <asp:Panel ID="PanelEditMode" runat="server">
-        <h3>
-            <asp:Label ID="LabelTitle" runat="server" Text=""></asp:Label></h3>
-        <table>
-            <tr>
-                <td><strong>國家：</strong></td>
-                <td>
-                    <asp:DropDownList ID="ddlCountry" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCountry_SelectedIndexChanged"></asp:DropDownList>
-                    <%--待做功能--%>
-                    <%--<asp:Button ID="ButtonAddCountry" runat="server" Text="新增國家" />--%>
-            </tr>
-            <tr>
-                <td><strong>地區：</strong></td>
-                <td>
-                    <asp:DropDownList ID="ddlRegion" runat="server"></asp:DropDownList>
-                    <%--待做功能--%>
-                    <%--<asp:Button ID="ButtonAddRegion" runat="server" Text="新增地區" />--%>
-            </tr>
-            <tr>
-                <td><strong>*名稱：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtName" runat="server" /></td>
-                <td>
-                    <asp:Label ID="LabelName" runat="server" Text="" Visible="false" ForeColor="Red"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td><strong>聯絡人：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtContact" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>地址：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" Rows="3" /></td>
-            </tr>
-            <tr>
-                <td><strong>電話：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtTel" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>傳真：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtFax" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>手機：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtCell" runat="server" /></td>
-            </tr>
-            <tr>
-                <td><strong>Email：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" /></td>
-            </tr>
-            <tr>
-                <td><strong>網站：</strong></td>
-                <td>
-                    <asp:TextBox ID="txtWebsite" runat="server" TextMode="Url" /></td>
-            </tr>
-            <tr>
-                <td><strong>圖片路徑：</strong></td>
-                <td>
-                    <asp:Image ID="ImageView2" runat="server" />
-                    <asp:FileUpload ID="FileUploadImage" runat="server" />
-                    <asp:Label ID="LabelImage" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </td>
-            </tr>
+            <%-- 【版面修改】將電話/傳真/手機改為三欄式佈局，提高資訊密度 --%>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="<%= txtTel.ClientID %>">電話</label>
+                        <asp:TextBox ID="txtTel" runat="server" CssClass="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="<%= txtFax.ClientID %>">傳真</label>
+                        <asp:TextBox ID="txtFax" runat="server" CssClass="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="<%= txtCell.ClientID %>">手機</label>
+                        <asp:TextBox ID="txtCell" runat="server" CssClass="form-control" />
+                    </div>
+                </div>
+            </div>
 
-            <tr>
-                <td><strong>顯示前台：</strong></td>
-                <td>
-                    <asp:CheckBox ID="chkIsActive" runat="server" /></td>
-            </tr>
-        </table>
-        <asp:Button ID="ButtonSave" runat="server" Text="儲存" OnClick="ButtonSave_Click" />
-        <asp:Button ID="ButtonCancel" runat="server" Text="取消" OnClick="ButtonCancel_Click" />
-    </asp:Panel>
+            <%-- Email 和網站維持兩欄式佈局 --%>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="<%= txtEmail.ClientID %>">Email</label>
+                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="<%= txtWebsite.ClientID %>">網站</label>
+                        <asp:TextBox ID="txtWebsite" runat="server" TextMode="Url" placeholder="https://..." CssClass="form-control" />
+                    </div>
+                </div>
+            </div>
 
+            <hr />
+
+            <div class="form-group">
+                <label>上傳/更換圖片</label>
+                <asp:Image ID="ImageView2" runat="server" CssClass="img-thumbnail d-block mb-2" Width="250" />
+                <div class="custom-file">
+                    <asp:FileUpload ID="FileUploadImage" runat="server" CssClass="custom-file-input" />
+                    <label class="custom-file-label" for="<%= FileUploadImage.ClientID %>">選擇檔案...</label>
+                </div>
+                <asp:Label ID="LabelImage" runat="server" Text="" CssClass="text-danger small mt-1"></asp:Label>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <%-- 【已修正】改用標準 HTML input 標籤，確保 class 加在正確的位置 --%>
+                    <input type="checkbox" id="chkIsActive" class="custom-control-input" runat="server" />
+                    <label class="custom-control-label" for="ContentPlaceHolder1_chkIsActive">在前台顯示此經銷商</label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-right">
+            <asp:LinkButton ID="ButtonSave" runat="server" Text="<i class='fas fa-save'></i> 儲存" OnClick="ButtonSave_Click" CssClass="btn btn-primary" />
+            <asp:HyperLink ID="ButtonCancel" runat="server" NavigateUrl="~/Admin/DealerList.aspx" CssClass="btn btn-secondary">返回列表</asp:HyperLink>
+        </div>
+    </div>
+
+    <%-- 暫時的除錯用 Label --%>
+    <asp:Label ID="debugLabel" runat="server" ForeColor="Red" Font-Size="Large" />
 </asp:Content>

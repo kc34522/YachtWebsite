@@ -46,6 +46,7 @@
 
                     <Columns>
                         <asp:TemplateField HeaderText="序號">
+                            <HeaderStyle CssClass="text-nowrap text-center" />
                             <ItemTemplate>
                                 <asp:Label ID="LabelRowNumber" runat="server" />
                             </ItemTemplate>
@@ -76,10 +77,16 @@
                             <ItemStyle CssClass="text-nowrap align-middle" />
                         </asp:BoundField>
 
-                        <asp:BoundField DataField="Comments" HeaderText="回覆內容" SortExpression="Comments">
+                        <asp:TemplateField HeaderText="回覆內容" SortExpression="Comments">
                             <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
-                            <ItemStyle CssClass="text-break align-middle" />
-                        </asp:BoundField>
+                            <ItemTemplate>
+                                <%-- 【已修改】設定固定寬度，並允許內容自動換行 --%>
+                                <div style="width: 400px; word-wrap: break-word;">
+                                    <%# Eval("Comments") %>
+                                </div>
+                            </ItemTemplate>
+                            <ItemStyle CssClass="align-middle" />
+                        </asp:TemplateField>
 
                         <asp:BoundField DataField="CreatedTime" HeaderText="表單送出時間" SortExpression="CreatedTime" DataFormatString="{0:yyyy-MM-dd HH:mm}">
                             <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
