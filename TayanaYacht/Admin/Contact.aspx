@@ -2,42 +2,108 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+<%--待優化: 搜尋功能加上「選擇搜尋欄位」的下拉選單--%>
+
+<%-- Content2: 建議將此處的標題移除，避免與卡片標題重複 --%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderH1" runat="server">
-    Contact List
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">聯絡表單列表</h6>
+        </div>
+        <div class="card-body">
+            <asp:Panel runat="server" DefaultButton="ButtonSearch">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <asp:TextBox ID="TextBoxSearch" runat="server" TextMode="Search" placeholder="請輸入關鍵字..." CssClass="form-control"></asp:TextBox>
+                            <div class="input-group-append">
+                                <asp:LinkButton ID="ButtonSearch" runat="server" OnClick="ButtonSearch_Click" CssClass="btn btn-primary">
+                                    <i class='fas fa-search'></i> 搜尋
+                                </asp:LinkButton>
+                                <asp:Button ID="ButtonClearSearch" runat="server" Text="清除" OnClick="ButtonClearSearch_Click" CssClass="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </asp:Panel>
 
-    <%--搜尋功能--%>
-    <%--Panel 加 DefaultButton 指定搜尋按鈕按 Enter 時，就會正確觸發搜尋功能，而不會誤觸到「登出」或其他上面的按鈕。--%>
-   <%-- <asp:Panel runat="server" DefaultButton="ButtonSearch">
-        <asp:TextBox ID="TextBoxSearch" runat="server" TextMode="Search"></asp:TextBox>
-        <asp:Button ID="ButtonSearch" runat="server" Text="搜尋" OnClick="ButtonSearch_Click" />
-    </asp:Panel>
-    <asp:Button ID="ButtonClearSearch" runat="server" Text="清除搜尋" OnClick="ButtonClearSearch_Click" />
-    <br />
-    <br />
-    <asp:Label ID="LabelSearchResult" runat="server" Visible="false" ForeColor="Blue"></asp:Label>
-    <br />
-    <br />--%>
+            <asp:Label ID="LabelSearchResult" runat="server" Visible="false" CssClass="text-info mt-2 d-block"></asp:Label>
+            <asp:Label ID="LabelContactListMessage" runat="server" Visible="false" CssClass="text-danger mt-2 d-block"></asp:Label>
 
-    <%--回覆清單列表--%>
-    <h4 class="mb-3">回覆清單列表</h4>
-    <asp:Label ID="LabelContactListMessage" runat="server" Text="" Visible="false"></asp:Label>
-    <br />
-    <asp:GridView ID="GridViewContact" runat="server" AutoGenerateColumns="False" OnRowDeleting="GridViewConctact_RowDeleting">
+            <div class="table-responsive mt-4">
+                <asp:GridView ID="GridViewContact" runat="server"
+                    AutoGenerateColumns="False"
+                    OnRowDeleting="GridViewConctact_RowDeleting"
+                    AllowPaging="true" PageSize="10"
+                    OnPageIndexChanging="GridViewContact_PageIndexChanging"
+                    DataKeyNames="Id" OnRowDataBound="GridViewContact_RowDataBound"
+                    CssClass="table table-bordered table-hover" Width="100%">
 
-        <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" InsertVisible="False" SortExpression="Id" Visible="false"></asp:BoundField>
-            <asp:BoundField DataField="Name" HeaderText="姓名" SortExpression="Name"></asp:BoundField>
-            <asp:BoundField DataField="Email" HeaderText="信箱" SortExpression="Email"></asp:BoundField>
-            <asp:BoundField DataField="Phone" HeaderText="電話" SortExpression="Phone"></asp:BoundField>
-            <asp:BoundField DataField="CountryName" HeaderText="國家" SortExpression="CountryName"></asp:BoundField>
-            <asp:BoundField DataField="Yacht" HeaderText="宣傳單:船型" SortExpression="Yacht"></asp:BoundField>
-            <asp:BoundField DataField="Comments" HeaderText="回覆內容" SortExpression="Comments"></asp:BoundField>
-            <asp:BoundField DataField="CreatedTime" HeaderText="回覆時間" SortExpression="CreatedTime"></asp:BoundField>
-            <asp:CommandField ShowDeleteButton="True"></asp:CommandField>
-        </Columns>
+                    <HeaderStyle CssClass="thead-dark" />
 
-    </asp:GridView>
+                    <Columns>
+                        <asp:TemplateField HeaderText="序號">
+                            <ItemTemplate>
+                                <asp:Label ID="LabelRowNumber" runat="server" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" CssClass="text-nowrap align-middle" />
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="Name" HeaderText="姓名" SortExpression="Name">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-nowrap align-middle" />
+                        </asp:BoundField>
 
+                        <asp:BoundField DataField="Email" HeaderText="信箱" SortExpression="Email">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="align-middle" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="Phone" HeaderText="電話" SortExpression="Phone">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-nowrap align-middle" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="CountryName" HeaderText="國家" SortExpression="CountryName">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-nowrap align-middle" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="ModelName" HeaderText="宣傳單:船型" SortExpression="ModelName">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-nowrap align-middle" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="Comments" HeaderText="回覆內容" SortExpression="Comments">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-break align-middle" />
+                        </asp:BoundField>
+
+                        <asp:BoundField DataField="CreatedTime" HeaderText="表單送出時間" SortExpression="CreatedTime" DataFormatString="{0:yyyy-MM-dd HH:mm}">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Left" />
+                            <ItemStyle CssClass="text-nowrap align-middle" />
+                        </asp:BoundField>
+
+                        <asp:TemplateField HeaderText="操作">
+                            <HeaderStyle CssClass="text-nowrap" HorizontalAlign="Center" />
+                            <ItemTemplate>
+                                <asp:LinkButton ID="btnDelete" runat="server"
+                                    CommandName="Delete"
+                                    CssClass="btn btn-sm btn-danger"
+                                    ToolTip="刪除"
+                                    OnClientClick="return confirm('確定要刪除這筆資料嗎？');">
+                                    <i class='fas fa-trash'></i>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" CssClass="align-middle" />
+                        </asp:TemplateField>
+                    </Columns>
+
+                    <PagerStyle CssClass="pagination-ys" />
+                </asp:GridView>
+            </div>
+        </div>
+    </div>
 </asp:Content>
