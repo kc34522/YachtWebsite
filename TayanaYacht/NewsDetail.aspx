@@ -2,6 +2,24 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
     <link href="<%= ResolveUrl("~/Front_Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
+    <style>
+        /* 限制 CKEditor 內容區塊中的圖片不超出容器寬度 */
+        .box3 img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 4px 0;
+        }
+
+        .box3 p {
+           float:left;
+        }
+
+        .downloads p {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bannerMask" runat="server">
     <img src="<%= ResolveUrl("~/Front_Assets/images/banner02_masks.png") %>" alt="&quot;&quot;" />
@@ -20,9 +38,9 @@
     <div class="box3">
         <h4>
             <asp:Label ID="LabelTitle" runat="server"></asp:Label></h4>
-        
-            <asp:Literal ID="LiteralContent" runat="server"></asp:Literal>
-        
+
+        <asp:Literal ID="LiteralContent" runat="server"></asp:Literal>
+
         <asp:Repeater ID="RepeaterImages" runat="server">
             <ItemTemplate>
                 <p>

@@ -71,6 +71,17 @@
                     background-color: #eee;
                     border-color: #ddd;
                 }
+
+        .image-wrapper {
+            text-align: center;
+        }
+
+            .image-wrapper img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bannerMask" runat="server">
@@ -110,7 +121,6 @@
                                 <br />
                                 <%--優化 看更多--%>
                                 <li><%# Eval("Title") %></li>
-
                             </ul>
                         </div>
                     </li>

@@ -419,6 +419,11 @@ body {
     padding-top: 10px;
 }
 
+    .list01 a {
+        color: #34A9D4;
+        text-decoration: none;
+    }
+
 .list02 {
     float: left;
     width: 100%;
