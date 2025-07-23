@@ -11,7 +11,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">聯絡表單列表</h6>
+            <h4 class="m-0 font-weight-bold text-primary">聯絡表單列表</h4>
         </div>
         <div class="card-body">
             <asp:Panel runat="server" DefaultButton="ButtonSearch">

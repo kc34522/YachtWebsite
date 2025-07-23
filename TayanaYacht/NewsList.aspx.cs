@@ -158,5 +158,12 @@ WHERE RowNumber >= @startRow AND RowNumber <= @endRow";
             return pagerHtml.ToString();
 
         }
+
+        // 裁切字串
+        protected string Truncate(string input, int length)
+        {
+            if (string.IsNullOrEmpty(input)) return "";
+            return input.Length <= length ? input : input.Substring(0, length) + "...";
+        }
     }
 }

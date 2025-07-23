@@ -22,7 +22,18 @@
                     <%--<asp:Button ID="ButtonDelete" runat="server" Text="刪除"/>--%>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField ShowDeleteButton="True"></asp:CommandField>
+            <asp:TemplateField HeaderText="刪除">
+                <ItemTemplate>
+                    <asp:LinkButton
+                        ID="btnDelete"
+                        runat="server"
+                        CommandName="Delete"
+                        Text="刪除"
+                        OnClientClick="return confirm('確定要刪除嗎？');">
+                    </asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+
         </Columns>
     </asp:GridView>
 </asp:Content>

@@ -57,11 +57,23 @@ WHERE   (Yachts.IsActive = 1) AND (YachtImages.IsHomepageCarousel = 1)";
 
         private void LoadNews()
         {
-            string sql = @"SELECT   TOP (3) News.IsTop, NewsImage.ImagePath, News.PublishDate, News.Id, News.Title, NewsImage.IsCover
-FROM     News INNER JOIN
-              NewsImage ON News.Id = NewsImage.NewsID
-WHERE   (NewsImage.IsCover = 1)
-ORDER BY News.IsTop DESC, News.PublishDate DESC";
+            string sql = @"WITH CoverImages AS (
+    SELECT 
+        News.Id AS NewsId,
+        News.Title,
+        News.PublishDate,
+        News.IsTop,
+        NewsImage.ImagePath,
+        ROW_NUMBER() OVER (PARTITION BY News.Id ORDER BY NewsImage.IsCover DESC) AS rn
+    FROM News
+    LEFT JOIN NewsImage ON News.Id = NewsImage.NewsID
+    WHERE News.PublishDate <= GETDATE()
+)
+SELECT TOP 3 *
+FROM CoverImages
+WHERE rn = 1
+ORDER BY IsTop DESC, PublishDate DESC;
+";
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))

@@ -119,7 +119,7 @@
                             <li>
                                 <div class="news01">
                                     <!--TOP標籤-->
-                                    <div class="newstop" visible="<%# Convert.ToBoolean(Eval("IsTop")) %>">
+                                    <div runat="server" class="newstop" visible='<%# Convert.ToBoolean(Eval("IsTop")) %>'>
                                         <img src="<%= ResolveUrl("~/Front_Assets/images/new_top01.png") %>" alt="&quot;&quot;" />
                                     </div>
                                     <!--TOP標籤結束-->
@@ -130,7 +130,7 @@
                                     </div>
                                     <p class="news02p2">
                                         <span><font color="#02a5b8"><%# ((DateTime)Eval("PublishDate")).ToString("yyyy-MM-dd") %></font></span>
-                                        <span><a href='<%# "NewsDetail.aspx?id=" + Eval("Id") %>'><%# Eval("Title") %></a></span>
+                                        <span><a href='<%# "NewsDetail.aspx?id=" + Eval("NewsId") %>'><%# Eval("Title") %></a></span>
                                     </p>
                                     <%--                                    <input type="hidden" value="0" />--%>
                                 </div>

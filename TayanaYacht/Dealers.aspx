@@ -5,21 +5,37 @@
     <style>
         .list02 ul {
             display: flex;
-            flex - wrap: nowrap;
-            align - items: flex - start;
+            flex-wrap: nowrap;
+            align-items: flex-start;
         }
 
         .list02li {
             flex: 0 0 auto;
-            margin - right: 20px;
+            margin-right: 20px;
         }
 
-        .list02 ul li: last - child {
+        .list02 ul li:last-child {
             flex: 1;
-            word -break: break-word;
-            overflow - wrap: break-word;
-            min - width: 0; /* 避免超出容器 */
+            word-break: break-word;
+            overflow-wrap: break-word;
+            min-width: 0; /* 避免超出容器 */
         }
+
+        .box {
+            overflow: hidden;
+        }
+
+            .box p {
+                margin: 0;
+                height: 100%;
+            }
+
+                .box p img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                }
     </style>
 </asp:Content>
 
@@ -47,7 +63,7 @@
                         <div class="list02">
                             <ul>
                                 <li class="list02li">
-                                    <div>
+                                    <div class="box">
                                         <p>
                                             <img src='<%# Eval("ImagePath") %>' alt="DealerPicture" onerror="this.onerror=null;this.src='Front_Assets/images/default2.jpg';" />
                                             <%--加上 onerror 事件的方式，在圖片載入失敗（找不到圖檔或欄位是空的）時顯示預設圖片，這是初學者最簡單實用的做法--%>

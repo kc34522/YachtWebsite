@@ -22,29 +22,19 @@ namespace TayanaYacht.Admin
         {
             if (!IsPostBack)
             {
-
-
                 if (HasQueryString())
                 {
-                    PanelImage.Visible = true;
-                    PanelFile.Visible = true;
-
-                    PanelViewMode.Visible = true;
-                    PanelEditMode.Visible = false;
-                    LoadViewContent();
+                    LabelContentTitle.Text = "編輯新聞";
+                    LoadEditContent();
                     LoadImages();
                     LoadFiles();
-
                 }
                 else
                 {
+                    txtTitle.Attributes.Add("required", "required");
+                    LabelContentTitle.Text = "新增新聞";
                     txtPublishDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                    PanelEditMode.Visible = true;
-                    PanelImage.Visible = false;
-                    PanelFile.Visible = false;
-
                 }
-
             }
 
             FileBrowser fileBrowser = new FileBrowser();
@@ -62,7 +52,7 @@ namespace TayanaYacht.Admin
             LabelImageMessage.Visible = false;
             LabelFileMessage.Visible = false;
             LabelFileGridView.Visible = false;
-            LabelImageGridView.Visible = false;
+            LabelImageGridView.Visible = false;           
         }
 
         // 判斷是否有querystring
@@ -92,54 +82,6 @@ WHERE   (Id = @Id)";
                         else
                         {
                             return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        // 載入ViewMode Content
-        private void LoadViewContent()
-        {
-            string sql = @"SELECT 
-    News.*,
-    U1.UserName AS CreatedUserName,
-    U2.UserName AS ModifiedUserName
-FROM News
-LEFT JOIN [User] AS U1 ON News.CreatedBy = U1.Id
-LEFT JOIN [User] AS U2 ON News.ModifiedBy = U2.Id
-WHERE News.Id = @Id";
-
-            string id = Request.QueryString["Id"].Trim();
-
-            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
-            {
-                using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
-                {
-                    sqlCommand.Parameters.AddWithValue("@Id", id);
-                    sqlConnection.Open();
-
-
-                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                    {
-                        if (sqlDataReader.Read())
-                        {
-                            LabelTitle.Text = sqlDataReader["Title"].ToString();
-                            chkIsTop.Checked = (Boolean)sqlDataReader["IsTop"];
-                            chkIsVisible.Checked = (Boolean)sqlDataReader["IsVisible"];
-                            LabelPublishDate.Text = Convert.ToDateTime(sqlDataReader["PublishDate"]).ToString("yyyy-MM-dd");
-                            LiteralContent.Text = sqlDataReader["Content"].ToString();
-                            LabelCreatedDate.Text = Convert.ToDateTime(sqlDataReader["CreatedDate"]).ToString();
-                            LabelCreatedBy.Text = sqlDataReader["CreatedUserName"].ToString();
-                            if (sqlDataReader["ModifiedDate"] != DBNull.Value)
-                            {
-                                LabelModifiedDate.Text = Convert.ToDateTime(sqlDataReader["ModifiedDate"]).ToString();
-                            }
-                            if (sqlDataReader["ModifiedUserName"] != DBNull.Value)
-                            {
-                                LabelModifiedBy.Text = sqlDataReader["ModifiedUserName"].ToString();
-                            }
-
                         }
                     }
                 }
@@ -229,9 +171,6 @@ WHERE   (Id = @Id)";
                         updateCommand.ExecuteNonQuery();
                     }
                 }
-                LoadViewContent();
-                PanelViewMode.Visible = true;
-                PanelEditMode.Visible = false;
             }
             else
             {
@@ -259,30 +198,9 @@ SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
                         Response.Redirect($"NewsAddEdit.aspx?Id={newId}");
                     }
                 }
-                LoadViewContent();
-                PanelViewMode.Visible = true;
-                PanelEditMode.Visible = false;
-
             }
-
-
-
-        }
-
-        // 編輯按鈕
-        protected void ButtonEdit_Click(object sender, EventArgs e)
-        {
-            LoadEditContent();
-            PanelEditMode.Visible = true;
-            PanelViewMode.Visible = false;
-        }
-
-        // 取消按鈕
-        protected void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            LoadViewContent();
-            PanelEditMode.Visible = false;
-            PanelViewMode.Visible = true;
+            LabelSaveMessage.Text = "儲存成功!";
+            LabelSaveMessage.Visible = true;
         }
 
         //  定義圖片CLASS類別 (多圖上傳用)
@@ -387,7 +305,7 @@ VALUES  (@Id, @OriginalName, @StoredName, @ImagePath)";
                             LabelImageMessage.Visible = true;
                             LoadImages();
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             tran.Rollback();
                             foreach (var image in imageInfos)
@@ -398,7 +316,7 @@ VALUES  (@Id, @OriginalName, @StoredName, @ImagePath)";
                                     System.IO.File.Delete(fullPath);
                                 }
                             }
-                            LabelImageMessage.Text = "圖片上傳失敗!" + ex.Message;
+                            LabelImageMessage.Text = "圖片上傳失敗，請稍後再試!";
                             LabelImageMessage.ForeColor = System.Drawing.Color.Red;
                             LabelImageMessage.Visible = true;
                         }
@@ -528,6 +446,9 @@ WHERE   (Id = @ImageId)";
                 sqlCommand.ExecuteNonQuery();
             }
             LoadImages();
+            LabelImageGridView.Text = "刪除成功!";
+            LabelImageGridView.ForeColor = System.Drawing.Color.Blue;
+            LabelImageGridView.Visible = true;
         }
 
         private class FileInfo
@@ -764,6 +685,9 @@ WHERE   (Id = @FileId)";
                 sqlCommand.ExecuteNonQuery();
             }
             LoadFiles();
+            LabelFileGridView.Text = "刪除成功!";
+            LabelFileGridView.ForeColor = System.Drawing.Color.Blue;
+            LabelFileGridView.Visible = true;
         }
     }
 }
