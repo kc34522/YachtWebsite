@@ -92,13 +92,13 @@ WHERE   (Id = @Id)";
         private void LoadEditContent()
         {
             string sql = @"SELECT 
-    News.*,
-    U1.UserName AS CreatedUserName,
-    U2.UserName AS ModifiedUserName
-FROM News
-LEFT JOIN [User] AS U1 ON News.CreatedBy = U1.Id
-LEFT JOIN [User] AS U2 ON News.ModifiedBy = U2.Id
-WHERE News.Id = @Id";
+                       News.*,
+                       U1.DisplayName AS CreatedUserName, -- 建議用 DisplayName 較佳
+                       U2.DisplayName AS ModifiedUserName
+                   FROM News
+                   LEFT JOIN [User] AS U1 ON News.CreatedBy = U1.Id
+                   LEFT JOIN [User] AS U2 ON News.ModifiedBy = U2.Id
+                   WHERE News.Id = @Id";
 
             string id = Request.QueryString["Id"].Trim();
 
@@ -151,9 +151,10 @@ WHERE News.Id = @Id";
 
             if (HasQueryString() == true)
             {
-                string sqlUpdate = @"UPDATE  News
-SET        Title =@Title, [Content] = @Content, IsTop = @IsTop, IsVisible = @IsVisible, PublishDate = @PublishDate, ModifiedDate = GetDate()
-WHERE   (Id = @Id)";
+                string sqlUpdate = @"UPDATE News 
+                               SET Title = @Title, [Content] = @Content, IsTop = @IsTop, IsVisible = @IsVisible, 
+                                   PublishDate = @PublishDate, ModifiedDate = GETDATE(), ModifiedBy = @ModifiedBy
+                             WHERE (Id = @Id)";
                 using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
                 {
                     using (SqlCommand updateCommand = new SqlCommand(sqlUpdate, sqlConnection))
@@ -163,8 +164,8 @@ WHERE   (Id = @Id)";
                         updateCommand.Parameters.AddWithValue("@IsTop", CheckBoxIsTopEdit.Checked);
                         updateCommand.Parameters.AddWithValue("@IsVisible", CheckBoxIsVisibleEdit.Checked);
                         updateCommand.Parameters.AddWithValue("@PublishDate", txtPublishDate.Text);
-                        //要改
-                        //updateCommand.Parameters.AddWithValue("@ModifiedBy", 1);
+                        
+                        updateCommand.Parameters.AddWithValue("@ModifiedBy", (int)Session["AdminId"]);
                         updateCommand.Parameters.AddWithValue("@Id", Request.QueryString["Id"]);
 
                         sqlConnection.Open();
@@ -174,10 +175,11 @@ WHERE   (Id = @Id)";
             }
             else
             {
-                string sqlInsert = @"INSERT INTO News
-              (Title, [Content], IsTop, IsVisible, PublishDate, CreatedDate)
-VALUES  (@Title, @Content, @IsTop, @IsVisible, @PublishDate, GetDate())
-SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
+                string sqlInsert = @"INSERT INTO News 
+                               (Title, [Content], IsTop, IsVisible, PublishDate, CreatedBy, ModifiedBy) 
+                             VALUES 
+                               (@Title, @Content, @IsTop, @IsVisible, @PublishDate, @CreatedBy, @ModifiedBy);
+                             SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
 
                 using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
                 {
@@ -189,8 +191,8 @@ SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
                         insertCommand.Parameters.AddWithValue("@IsVisible", CheckBoxIsVisibleEdit.Checked);
                         insertCommand.Parameters.AddWithValue("@PublishDate", txtPublishDate.Text);
                         // 要改
-                        //insertCommand.Parameters.AddWithValue("@CreatedBy", 1);
-
+                        insertCommand.Parameters.AddWithValue("@CreatedBy", (int)Session["AdminId"]);
+                        insertCommand.Parameters.AddWithValue("@ModifiedBy", (int)Session["AdminId"]); // 新增時，兩者可設為相同
                         sqlConnection.Open();
 
                         // 抓回新插入的 Id (會回傳 SQL 查詢的第一列第一欄，剛好就是我們要的 Id)
@@ -201,6 +203,7 @@ SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
             }
             LabelSaveMessage.Text = "儲存成功!";
             LabelSaveMessage.Visible = true;
+            LoadEditContent();
         }
 
         //  定義圖片CLASS類別 (多圖上傳用)
@@ -278,6 +281,14 @@ SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
                                 Directory.CreateDirectory(folderPath);
                             }
 
+                            string checkCoverSql = @"SELECT COUNT(*) FROM NewsImage WHERE NewsID = @Id AND IsCover = 1";
+                            bool hasCover = false;
+                            using (SqlCommand checkCoverCommand = new SqlCommand(checkCoverSql, sqlConnection, tran))
+                            {
+                                checkCoverCommand.Parameters.AddWithValue("@Id", id);
+                                hasCover = Convert.ToInt32(checkCoverCommand.ExecuteScalar()) > 0;
+                            }
+
                             // 儲存圖片檔案
                             foreach (var image in imageInfos)
                             {
@@ -286,17 +297,19 @@ SELECT SCOPE_IDENTITY()"; // 加這行取得新 Id
 
                                 // 儲存到資料庫
                                 string sql = @"INSERT INTO NewsImage
-              (NewsID, OriginalImageName, StoredFileName, ImagePath)
-VALUES  (@Id, @OriginalName, @StoredName, @ImagePath)";
+              (NewsID, OriginalImageName, StoredFileName, ImagePath, IsCover)
+VALUES  (@Id, @OriginalName, @StoredName, @ImagePath, @IsCover)";
                                 using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection, tran))
                                 {
                                     sqlCommand.Parameters.AddWithValue("@Id", id);
                                     sqlCommand.Parameters.AddWithValue("@OriginalName", image.OriginalName);
                                     sqlCommand.Parameters.AddWithValue("@StoredName", image.StoredName);
                                     sqlCommand.Parameters.AddWithValue("@ImagePath", image.ImagePath);
+                                    sqlCommand.Parameters.AddWithValue("@IsCover", !hasCover ? 1 : 0);
 
                                     sqlCommand.ExecuteNonQuery();
                                 }
+                                hasCover = true;
                             }
 
                             tran.Commit();
@@ -348,107 +361,86 @@ WHERE   (NewsID = @id)";
             }
         }
 
-        // 圖片GridView: 編輯按鈕
-        protected void GridViewImage_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            GridViewImage.EditIndex = e.NewEditIndex;
-            LoadImages();
-        }
-
-        // 圖片GridView: 取消按鈕
-        protected void GridViewImage_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            GridViewImage.EditIndex = -1;
-            LoadImages();
-        }
-
-        // 圖片GridView: 更新按鈕
-        protected void GridViewImage_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        // 圖片GridView: 刪除按鈕
+        protected void GridViewImage_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            GridViewRow gridViewRow = GridViewImage.Rows[rowIndex];
-            TextBox updateTextBox = gridViewRow.FindControl("TextBoxAlt") as TextBox;
-            CheckBox updateCheckBox = gridViewRow.FindControl("CheckBoxIsCover") as CheckBox;
-
-            string altEdit = updateTextBox.Text.Trim();
-            bool isCoveredEdit = updateCheckBox.Checked;
-
             int imageId = Convert.ToInt32(GridViewImage.DataKeys[rowIndex].Value);
             int id = Convert.ToInt32(Request.QueryString["Id"]);
 
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
                 sqlConnection.Open();
-                SqlTransaction tran = sqlConnection.BeginTransaction();
-                try
+                using (SqlTransaction tran = sqlConnection.BeginTransaction())
                 {
-                    if (isCoveredEdit)
+                    try
                     {
-                        // 先將同一新聞的所有圖片設為不是封面
-                        string clearCoverSql = @"UPDATE  NewsImage
-                                                SET        IsCover = 0
-                                                WHERE   (NewsID = @Id)";
-
-                        using (SqlCommand clearCoverCommand = new SqlCommand(clearCoverSql, sqlConnection, tran))
+                        string checkImageCountSql = @"SELECT COUNT(*) FROM NewsImage WHERE NewsID = @Id";
+                        int imageCount;
+                        using (SqlCommand checkImageCountCommand = new SqlCommand(checkImageCountSql, sqlConnection, tran))
                         {
-                            clearCoverCommand.Parameters.AddWithValue("@Id", id);
-                            clearCoverCommand.ExecuteNonQuery();
+                            checkImageCountCommand.Parameters.AddWithValue("@Id", id);
+                            imageCount = Convert.ToInt32(checkImageCountCommand.ExecuteScalar());
                         }
 
+                        if (imageCount <= 1)
+                        {
+                            tran.Rollback();
+                            LabelImageMessage.Text = "至少需要保留一張圖片作為封面！";
+                            LabelImageMessage.ForeColor = System.Drawing.Color.Red;
+                            LabelImageMessage.Visible = true;
+                            return;
+                        }
+
+                        string checkCoverSql = @"SELECT IsCover FROM NewsImage WHERE Id = @ImageId";
+                        bool isCover = false;
+                        using (SqlCommand checkCoverCommand = new SqlCommand(checkCoverSql, sqlConnection, tran))
+                        {
+                            checkCoverCommand.Parameters.AddWithValue("@ImageId", imageId);
+                            isCover = Convert.ToBoolean(checkCoverCommand.ExecuteScalar());
+                        }
+
+                        string deleteSql = @"DELETE FROM NewsImage WHERE Id = @ImageId";
+                        using (SqlCommand deleteCommand = new SqlCommand(deleteSql, sqlConnection, tran))
+                        {
+                            deleteCommand.Parameters.AddWithValue("@ImageId", imageId);
+                            deleteCommand.ExecuteNonQuery();
+                        }
+
+                        if (isCover)
+                        {
+                            string selectNewCoverSql = @"SELECT TOP 1 Id FROM NewsImage WHERE NewsID = @Id";
+                            using (SqlCommand selectNewCoverCommand = new SqlCommand(selectNewCoverSql, sqlConnection, tran))
+                            {
+                                selectNewCoverCommand.Parameters.AddWithValue("@Id", id);
+                                object newCoverId = selectNewCoverCommand.ExecuteScalar();
+                                if (newCoverId != null)
+                                {
+                                    string updateNewCoverSql = @"UPDATE NewsImage SET IsCover = 1 WHERE Id = @NewCoverId";
+                                    using (SqlCommand updateNewCoverCommand = new SqlCommand(updateNewCoverSql, sqlConnection, tran))
+                                    {
+                                        updateNewCoverCommand.Parameters.AddWithValue("@NewCoverId", newCoverId);
+                                        updateNewCoverCommand.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+
+                        tran.Commit();
+                        LabelImageMessage.Text = "刪除成功!";
+                        LabelImageMessage.ForeColor = System.Drawing.Color.Blue;
+                        LabelImageMessage.Visible = true;
+                        LoadImages();
                     }
-
-                    string updateSql = @"UPDATE  NewsImage
-SET        AltText = @Alt, IsCover = @IsCover
-WHERE   (Id = @ImageId)";
-
-                    using (SqlCommand updateCommand = new SqlCommand(updateSql, sqlConnection, tran))
+                    catch
                     {
-                        updateCommand.Parameters.AddWithValue("@Alt", altEdit);
-                        updateCommand.Parameters.AddWithValue("@IsCover", isCoveredEdit);
-                        updateCommand.Parameters.AddWithValue("@ImageId", imageId);
-
-                        updateCommand.ExecuteNonQuery();
+                        tran.Rollback();
+                        LabelImageMessage.Text = "刪除失敗!";
+                        LabelImageMessage.ForeColor = System.Drawing.Color.Red;
+                        LabelImageMessage.Visible = true;
                     }
-
-                    tran.Commit();
-                    GridViewImage.EditIndex = -1;
-                    LoadImages();
-
-                    LabelImageGridView.Text = "更新成功!";
-                    LabelImageGridView.ForeColor = System.Drawing.Color.Blue;
-                    LabelImageGridView.Visible = true;
-
-                }
-                catch
-                {
-                    tran.Rollback();
-                    LabelImageGridView.Text = "更新失敗!";
-                    LabelImageGridView.ForeColor = System.Drawing.Color.Red;
-                    LabelImageGridView.Visible = true;
                 }
             }
-        }
-
-        // 圖片GridView: 刪除按鈕
-        protected void GridViewImage_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            int imageId = Convert.ToInt32(GridViewImage.DataKeys[rowIndex].Value);
-
-            string sql = @"Delete From NewsImage
-WHERE   (Id = @ImageId)";
-            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
-            using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
-            {
-                sqlCommand.Parameters.AddWithValue("@ImageId", imageId);
-
-                sqlConnection.Open();
-                sqlCommand.ExecuteNonQuery();
-            }
-            LoadImages();
-            LabelImageGridView.Text = "刪除成功!";
-            LabelImageGridView.ForeColor = System.Drawing.Color.Blue;
-            LabelImageGridView.Visible = true;
         }
 
         private class FileInfo
@@ -688,6 +680,51 @@ WHERE   (Id = @FileId)";
             LabelFileGridView.Text = "刪除成功!";
             LabelFileGridView.ForeColor = System.Drawing.Color.Blue;
             LabelFileGridView.Visible = true;
+        }
+
+        protected void RadioButtonIsCover_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            GridViewRow row = (GridViewRow)rb.NamingContainer;
+            int imageId = Convert.ToInt32(GridViewImage.DataKeys[row.RowIndex].Value);
+            int id = Convert.ToInt32(Request.QueryString["Id"]);
+
+            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlTransaction tran = sqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        string clearCoverSql = @"UPDATE NewsImage SET IsCover = 0 WHERE NewsID = @Id";
+                        using (SqlCommand clearCoverCommand = new SqlCommand(clearCoverSql, sqlConnection, tran))
+                        {
+                            clearCoverCommand.Parameters.AddWithValue("@Id", id);
+                            clearCoverCommand.ExecuteNonQuery();
+                        }
+
+                        string updateCoverSql = @"UPDATE NewsImage SET IsCover = 1 WHERE Id = @ImageId";
+                        using (SqlCommand updateCoverCommand = new SqlCommand(updateCoverSql, sqlConnection, tran))
+                        {
+                            updateCoverCommand.Parameters.AddWithValue("@ImageId", imageId);
+                            updateCoverCommand.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        LabelImageMessage.Text = "封面選擇成功!";
+                        LabelImageMessage.ForeColor = System.Drawing.Color.Blue;
+                        LabelImageMessage.Visible = true;
+                        LoadImages();
+                    }
+                    catch
+                    {
+                        tran.Rollback();
+                        LabelImageMessage.Text = "封面選擇失敗!";
+                        LabelImageMessage.ForeColor = System.Drawing.Color.Red;
+                        LabelImageMessage.Visible = true;
+                    }
+                }
+            }
         }
     }
 }

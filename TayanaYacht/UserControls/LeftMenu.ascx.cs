@@ -110,7 +110,7 @@ namespace TayanaYacht
                             {
                                 while (sqlDataReader.Read())
                                 {
-                                    items.Add(new MenuItem { Url = $"Yachts_Layout.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"]) ? " (New Building)" : "") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "") });
+                                    items.Add(new MenuItem { Url = $"Yachts_Specification.aspx?id={sqlDataReader["YachtID"]}", Text = sqlDataReader["ModelName"].ToString() + (Convert.ToBoolean(sqlDataReader["IsNewBuilding"]) ? " (New Building)" : "") + (Convert.ToBoolean(sqlDataReader["IsNewDesign"]) ? " (New Design)" : "") });
                                 }
                             }
                         }

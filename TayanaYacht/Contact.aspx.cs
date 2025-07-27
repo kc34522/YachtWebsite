@@ -44,10 +44,10 @@ namespace TayanaYacht
         private void LoadDropDownList()
         {
             string sqlCountry = @"SELECT   Country.*
-                                FROM     Country";
+                                FROM     Country order by name";
             string sqlBrochure = @"SELECT   YachtID, ModelName, IsActive
                                     FROM     Yachts
-                                    WHERE   (IsActive = 1)";
+                                    WHERE   (IsActive = 1) order by modelname";
 
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
@@ -193,14 +193,14 @@ namespace TayanaYacht
             smtp.Port = 587; // Gmail 用 587 這個 Port（支援加密）
             smtp.EnableSsl = true; // 啟用 SSL 加密（很重要）
             // 登入帳號密碼（使用寄件者的帳密）
-            smtp.Credentials = new NetworkCredential("~~~~~~~~~~~~~~~~~~~~~~", "~~~~~~~~~~~~~~~~~~~~~~"); 
+            smtp.Credentials = new NetworkCredential("~~~~~~~~~~~~~~~", "~~~~~~~~~~~~~~~~"); 
 
             try
             {
                 // --- 寄送第一封信 (給管理員) ---
                 MailMessage mailtoAdmin = new MailMessage();
-                mailtoAdmin.From = new MailAddress("~~~~~~~~~~~~~~~~~~~~~~"); // 寄件者（需是SMTP設定的帳號）
-                mailtoAdmin.To.Add("~~~~~~~~~~~~~~~~~~~~~~"); // 收件者
+                mailtoAdmin.From = new MailAddress("~~~~~~~~~~~~~~~"); // 寄件者（需是SMTP設定的帳號）
+                mailtoAdmin.To.Add("~~~~~~~~~~~~~~"); // 收件者
                 mailtoAdmin.Subject = $"【Tayana 聯絡表單】有來自{name}的新留言 ";
                 mailtoAdmin.Body = adminBody;
                 mailtoAdmin.IsBodyHtml = true; //m這封信的內容是 HTML 格式，而不是純文字。
@@ -209,7 +209,7 @@ namespace TayanaYacht
 
                 // --- 寄送第二封信 (給使用者) ---
                 MailMessage mailToUser = new MailMessage();
-                mailToUser.From = new MailAddress("~~~~~~~~~~~~~~~~~~~~~~", "Tayana Yachts"); // 可以加上寄件人名稱
+                mailToUser.From = new MailAddress("~~~~~~~~~~~~~~~", "Tayana Yachts"); // 可以加上寄件人名稱
                 mailToUser.To.Add(email); // 收件者是填表單的人
                 mailToUser.Subject = userSubject;
                 mailToUser.Body = userBody;

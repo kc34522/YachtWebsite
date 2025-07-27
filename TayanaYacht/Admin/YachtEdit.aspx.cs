@@ -24,27 +24,68 @@ namespace TayanaYacht.Admin
         // 使用 TryParse 更安全，如果網址沒有id或id非數字，idFromUrl 會是 0
         protected void Page_Load(object sender, EventArgs e)
         {
+            ClearMessages();
+
+            txtModelText.Attributes.Add("required", "required");
+            txtModelNumber.Attributes.Add("required", "required");
 
             int.TryParse(Request.QueryString["Id"], out int idFromUrl);
             this.YachtId = idFromUrl; // 將從網址取得的id，存入私有屬性中
-
+                                      // 檢查是否為我們自訂的 PostBack 事件
+            if (IsPostBack)
+            {
+                string eventTarget = Request.Form["__EVENTTARGET"];
+                if (eventTarget == "SetHomepageCarousel")
+                {
+                    // 如果是，就呼叫對應的處理方法
+                    HandleHomepageCarouselUpdate();
+                }
+            }
             if (!IsPostBack)
             {
                 if (YachtId > 0)
                 {
+                    lblCardTitle.Text = "編輯船型資料";
                     LoadData();
+
+                    // 啟用所有頁籤
+                    dimensionsTab.Disabled = false;
+                    galleryTab.Disabled = false;
+                    downloadsTab.Disabled = false;
+                }
+                else // 新增模式
+                {
+                    lblCardTitle.Text = "新增船型";
+                    // 禁用所有頁籤
+                    dimensionsTab.Disabled = true;
+                    galleryTab.Disabled = true;
+                    downloadsTab.Disabled = true;
+
+                    // 可以在此給予提示
+                    LabelInfoMessage.Text = "請先儲存主要資訊後，再上傳圖片與檔案。";
+                    LabelInfoMessage.Visible = true;
+                    // 新增模式預設選中全新建造
+                    rblBuildDesign.SelectedValue = "None";
                 }
 
             }
+            else
+            {
+                // 檢查 ActiveTabField 的值是否正確
+                if (string.IsNullOrEmpty(ActiveTabField.Value))
+                {
+                    ActiveTabField.Value = "#mainInfo"; // 預設為主要資訊分頁
+                }
+                SetActiveTab(); // 恢復分頁狀態
+
+
+            }
+
             FileBrowser fileBrowser = new FileBrowser();
             fileBrowser.BasePath = "/ckfinder";
             // 重要：請確保 CKFinder 本身有做身份驗證！
             fileBrowser.SetupCKEditor(CKEditorOverviewContent);
             fileBrowser.SetupCKEditor(CKEditorSpecification);
-
-
-            ClearMessages();
-
         }
 
         // 統一清除Label訊息
@@ -83,11 +124,20 @@ WHERE   (YachtID = @yachtId)";
                     {
                         if (reader.Read())
                         {
+                            lblCardTitle.Text = $"編輯船型資料 - {reader["ModelName"]}";
+
                             txtModelText.Text = reader["ModelNameText"].ToString();
                             txtModelNumber.Text = reader["ModelNameNumber"].ToString();
                             CheckBoxIsActive.Checked = Convert.ToBoolean(reader["IsActive"]);
-                            chkIsNewBuilding.Checked = Convert.ToBoolean(reader["IsNewBuilding"]);
-                            chkIsNewDesign.Checked = Convert.ToBoolean(reader["IsNewDesign"]);
+                            bool isNewBuilding = Convert.ToBoolean(reader["IsNewBuilding"]);
+                            bool isNewDesign = Convert.ToBoolean(reader["IsNewDesign"]);
+                            // 設置 RadioButtonList：根據資料庫值選擇對應選項
+                            if (isNewBuilding)
+                                rblBuildDesign.SelectedValue = "NewBuilding";
+                            else if (isNewDesign)
+                                rblBuildDesign.SelectedValue = "NewDesign";
+                            else
+                                rblBuildDesign.SelectedValue = "None";
                             CKEditorOverviewContent.Text = reader["OverviewContent"].ToString();
                             CKEditorSpecification.Text = reader["SpecificationsContent"].ToString();
                         }
@@ -127,7 +177,7 @@ WHERE   (YachtID = @yachtId)";
                         {
                             GridViewDimension.DataSource = dataTable;
                             GridViewDimension.DataBind();
-                        }                           
+                        }
 
 
                     }
@@ -215,11 +265,7 @@ WHERE   (ImageCategory = N'Carousel') AND (YachtID = @yachtId)";
                         RepeaterCarouselImages.DataBind();
                     }
                 }
-
-
             }
-
-
         }
 
         // 取消按鈕
@@ -231,16 +277,19 @@ WHERE   (ImageCategory = N'Carousel') AND (YachtID = @yachtId)";
                 LabelInfoMessage.Text = "已取消變更!";
                 LabelInfoMessage.ForeColor = System.Drawing.Color.Blue;
                 LabelInfoMessage.Visible = true;
+                ActiveTabField.Value = "#mainInfo"; // 確保停留在主要資訊分頁
+                SetActiveTab();
             }
             else
             {
                 txtModelText.Text = "";
                 txtModelNumber.Text = "";
                 CheckBoxIsActive.Checked = true;
-                chkIsNewBuilding.Checked = false;
-                chkIsNewDesign.Checked = false;
+                rblBuildDesign.SelectedValue = "None"; // 新增模式預設選中全新建造
                 CKEditorOverviewContent.Text = "";
                 CKEditorSpecification.Text = "";
+                ActiveTabField.Value = "#mainInfo"; // 確保停留在主要資訊分頁
+                SetActiveTab();
             }
         }
 
@@ -253,6 +302,8 @@ WHERE   (ImageCategory = N'Carousel') AND (YachtID = @yachtId)";
                 LabelModelText.Text = "型號系列不得為空白!";
                 LabelModelText.ForeColor = System.Drawing.Color.Red;
                 LabelModelText.Visible = true;
+                ActiveTabField.Value = "#mainInfo"; // 確保停留在主要資訊分頁
+                SetActiveTab();
                 return;
             }
             if (string.IsNullOrWhiteSpace(txtModelNumber.Text))
@@ -260,6 +311,8 @@ WHERE   (ImageCategory = N'Carousel') AND (YachtID = @yachtId)";
                 LabelModelNumber.Text = "型號數字不得為空白!";
                 LabelModelNumber.ForeColor = System.Drawing.Color.Red;
                 LabelModelNumber.Visible = true;
+                ActiveTabField.Value = "#mainInfo"; // 確保停留在主要資訊分頁
+                SetActiveTab();
                 return;
             }
             string sql;
@@ -285,8 +338,9 @@ SELECT SCOPE_IDENTITY()";
                     sqlCommand.Parameters.AddWithValue("@ModelName", txtModelText.Text + " " + txtModelNumber.Text);
                     sqlCommand.Parameters.AddWithValue("@ModelNameText", txtModelText.Text);
                     sqlCommand.Parameters.AddWithValue("@ModelNameNumber", txtModelNumber.Text);
-                    sqlCommand.Parameters.AddWithValue("@IsNewBuilding", chkIsNewBuilding.Checked);
-                    sqlCommand.Parameters.AddWithValue("@IsNewDesign", chkIsNewDesign.Checked);
+                    // 根據 RadioButtonList 選項設置 IsNewBuilding 和 IsNewDesign
+                    sqlCommand.Parameters.AddWithValue("@IsNewBuilding", rblBuildDesign.SelectedValue == "NewBuilding" ? 1 : 0);
+                    sqlCommand.Parameters.AddWithValue("@IsNewDesign", rblBuildDesign.SelectedValue == "NewDesign" ? 1 : 0);
                     sqlCommand.Parameters.AddWithValue("@IsActive", CheckBoxIsActive.Checked);
                     sqlCommand.Parameters.AddWithValue("@OverviewContent", CKEditorOverviewContent.Text);
                     sqlCommand.Parameters.AddWithValue("@SpecificationsContent", CKEditorSpecification.Text);
@@ -299,18 +353,21 @@ SELECT SCOPE_IDENTITY()";
                     // 抓回新插入的 Id (會回傳 SQL 查詢的第一列第一欄，剛好就是我們要的 Id)
                     if (YachtId > 0)
                     {
-                        sqlCommand.ExecuteNonQuery(); 
+                        sqlCommand.ExecuteNonQuery();
                         LoadData();
+                        LabelInfoMessage.Text = "資料更新成功!";
+                        LabelInfoMessage.ForeColor = System.Drawing.Color.Blue;
+                        LabelInfoMessage.Visible = true;
                     }
                     else
                     {
                         int newId = Convert.ToInt32(sqlCommand.ExecuteScalar());
                         Response.Redirect($"YachtEdit.aspx?Id={newId}");
                     }
-
-
                 }
             }
+            ActiveTabField.Value = "#mainInfo"; // 確保停留在主要資訊分頁
+            SetActiveTab();
         }
 
 
@@ -322,6 +379,8 @@ SELECT SCOPE_IDENTITY()";
                 LabelDimUploadMessage.Text = "請選擇一件圖片檔案!";
                 LabelDimUploadMessage.ForeColor = System.Drawing.Color.Red;
                 LabelDimUploadMessage.Visible = true;
+                ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
 
@@ -334,6 +393,8 @@ SELECT SCOPE_IDENTITY()";
                 LabelDimUploadMessage.Text = "請選擇.jpg/.jpeg圖片檔案!";
                 LabelDimUploadMessage.ForeColor = System.Drawing.Color.Red;
                 LabelDimUploadMessage.Visible = true;
+                ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
 
@@ -343,6 +404,8 @@ SELECT SCOPE_IDENTITY()";
                 LabelDimUploadMessage.Text = "您選擇的圖片超過1MB,不能上傳!";
                 LabelDimUploadMessage.ForeColor = System.Drawing.Color.Red;
                 LabelDimUploadMessage.Visible = true;
+                ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
 
@@ -390,6 +453,8 @@ WHERE   (YachtID = @yachtId)";
                         LabelDimUploadMessage.ForeColor = System.Drawing.Color.Blue;
                         LabelDimUploadMessage.Visible = true;
                         LoadData();
+                        ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                        SetActiveTab(); // 恢復分頁狀態
                     }
                     catch (Exception ex)
                     {
@@ -404,6 +469,8 @@ WHERE   (YachtID = @yachtId)";
                         LabelDimUploadMessage.Text = "圖片上傳失敗!" + ex.Message;
                         LabelDimUploadMessage.ForeColor = System.Drawing.Color.Red;
                         LabelDimUploadMessage.Visible = true;
+                        ActiveTabField.Value = "#dimensions"; // 確保錯誤時也停留在尺寸規格分頁
+                        SetActiveTab(); // 恢復分頁狀態
                     }
                 }
             }
@@ -428,6 +495,8 @@ WHERE   (YachtID = @yachtId)";
                 LabelDownloadMessage.Text = "請選擇至少一件檔案!";
                 LabelDownloadMessage.ForeColor = System.Drawing.Color.Red;
                 LabelDownloadMessage.Visible = true;
+                ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
             else
@@ -443,6 +512,8 @@ WHERE   (YachtID = @yachtId)";
                         LabelDownloadMessage.Text = "請選擇.pdf檔案!";
                         LabelDownloadMessage.ForeColor = System.Drawing.Color.Red;
                         LabelDownloadMessage.Visible = true;
+                        ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -452,6 +523,8 @@ WHERE   (YachtID = @yachtId)";
                         LabelDownloadMessage.Text = "您選擇的檔案超過5MB,不能上傳!";
                         LabelDownloadMessage.ForeColor = System.Drawing.Color.Red;
                         LabelDownloadMessage.Visible = true;
+                        ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -513,6 +586,8 @@ VALUES  (@YachtID, @OriginalFileName, @StoredFileName, @DisplayName, @FilePath)"
                             LabelDownloadMessage.ForeColor = System.Drawing.Color.Blue;
                             LabelDownloadMessage.Visible = true;
                             LoadData();
+                            ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                         catch (Exception ex)
                         {
@@ -531,6 +606,8 @@ VALUES  (@YachtID, @OriginalFileName, @StoredFileName, @DisplayName, @FilePath)"
                             LabelDownloadMessage.Text = "檔案上傳失敗!" + ex.Message;
                             LabelDownloadMessage.ForeColor = System.Drawing.Color.Red;
                             LabelDownloadMessage.Visible = true;
+                            ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                     }
                 }
@@ -555,6 +632,8 @@ VALUES  (@YachtID, @OriginalFileName, @StoredFileName, @DisplayName, @FilePath)"
                 LabelLayoutMessage.Text = "請選擇至少一件圖片檔案!";
                 LabelLayoutMessage.ForeColor = System.Drawing.Color.Red;
                 LabelLayoutMessage.Visible = true;
+                ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
             else
@@ -570,6 +649,8 @@ VALUES  (@YachtID, @OriginalFileName, @StoredFileName, @DisplayName, @FilePath)"
                         LabelLayoutMessage.Text = "請選擇.jpg/.jpeg圖片檔案!";
                         LabelLayoutMessage.ForeColor = System.Drawing.Color.Red;
                         LabelLayoutMessage.Visible = true;
+                        ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -579,6 +660,8 @@ VALUES  (@YachtID, @OriginalFileName, @StoredFileName, @DisplayName, @FilePath)"
                         LabelLayoutMessage.Text = "您選擇的圖片超過1MB,不能上傳!";
                         LabelLayoutMessage.ForeColor = System.Drawing.Color.Red;
                         LabelLayoutMessage.Visible = true;
+                        ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -636,6 +719,8 @@ VALUES  (@Id, N'Layout', @ImagePath)";
                             LabelLayoutMessage.ForeColor = System.Drawing.Color.Blue;
                             LabelLayoutMessage.Visible = true;
                             LoadData();
+                            ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                         catch (Exception ex)
                         {
@@ -651,6 +736,8 @@ VALUES  (@Id, N'Layout', @ImagePath)";
                             LabelLayoutMessage.Text = "圖片上傳失敗!" + ex.Message;
                             LabelLayoutMessage.ForeColor = System.Drawing.Color.Red;
                             LabelLayoutMessage.Visible = true;
+                            ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                     }
                 }
@@ -665,6 +752,8 @@ VALUES  (@Id, N'Layout', @ImagePath)";
                 LabelCarouselMessage.Text = "請選擇至少一件圖片檔案!";
                 LabelCarouselMessage.ForeColor = System.Drawing.Color.Red;
                 LabelCarouselMessage.Visible = true;
+                ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
             else
@@ -680,6 +769,8 @@ VALUES  (@Id, N'Layout', @ImagePath)";
                         LabelCarouselMessage.Text = "請選擇.jpg/.jpeg圖片檔案!";
                         LabelCarouselMessage.ForeColor = System.Drawing.Color.Red;
                         LabelCarouselMessage.Visible = true;
+                        ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -689,6 +780,8 @@ VALUES  (@Id, N'Layout', @ImagePath)";
                         LabelCarouselMessage.Text = "您選擇的圖片超過1MB,不能上傳!";
                         LabelCarouselMessage.ForeColor = System.Drawing.Color.Red;
                         LabelCarouselMessage.Visible = true;
+                        ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                        SetActiveTab(); // 恢復分頁狀態
                         return;
                     }
 
@@ -746,6 +839,8 @@ VALUES  (@Id, N'Carousel', @ImagePath)";
                             LabelCarouselMessage.ForeColor = System.Drawing.Color.Blue;
                             LabelCarouselMessage.Visible = true;
                             LoadData();
+                            ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                         catch (Exception ex)
                         {
@@ -761,6 +856,8 @@ VALUES  (@Id, N'Carousel', @ImagePath)";
                             LabelCarouselMessage.Text = "圖片上傳失敗!" + ex.Message;
                             LabelCarouselMessage.ForeColor = System.Drawing.Color.Red;
                             LabelCarouselMessage.Visible = true;
+                            ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                            SetActiveTab(); // 恢復分頁狀態
                         }
                     }
                 }
@@ -780,6 +877,8 @@ VALUES  (@Id, N'Carousel', @ImagePath)";
                     LabelGridViewDimMessage.Text = "規格名稱和內容不得為空白！";
                     LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Red;
                     LabelGridViewDimMessage.Visible = true;
+                    ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                    SetActiveTab(); // 恢復分頁狀態
                     return;
                 }
 
@@ -805,6 +904,8 @@ VALUES  (@YachtID, @SpecLabel, @SpecValue)";
                 LabelGridViewDimMessage.Text = "規格新增成功！";
                 LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Blue;
                 LabelGridViewDimMessage.Visible = true;
+                ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                SetActiveTab(); // 恢復分頁狀態
             }
         }
 
@@ -814,7 +915,8 @@ VALUES  (@YachtID, @SpecLabel, @SpecValue)";
             int rowIndex = e.NewEditIndex;
             GridViewDimension.EditIndex = rowIndex;
             LoadData();
-            
+            ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Dimension GridView: 取消按鈕
@@ -825,6 +927,8 @@ VALUES  (@YachtID, @SpecLabel, @SpecValue)";
             LabelGridViewDimMessage.Text = "規格已取消編輯！";
             LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Blue;
             LabelGridViewDimMessage.Visible = true;
+            ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Dimension GridView: 更新按鈕
@@ -840,6 +944,8 @@ VALUES  (@YachtID, @SpecLabel, @SpecValue)";
                 LabelGridViewDimMessage.Text = "規格名稱和內容不得為空白！";
                 LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Red;
                 LabelGridViewDimMessage.Visible = true;
+                ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
 
@@ -867,6 +973,8 @@ WHERE   (SpecID = @SpecID)";
             LabelGridViewDimMessage.Text = "規格更新成功！";
             LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Blue;
             LabelGridViewDimMessage.Visible = true;
+            ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Dimension GridView: 刪除按鈕
@@ -894,6 +1002,8 @@ WHERE   (SpecID = @SpecID)";
             LabelGridViewDimMessage.Text = "規格刪除成功！";
             LabelGridViewDimMessage.ForeColor = System.Drawing.Color.Blue;
             LabelGridViewDimMessage.Visible = true;
+            ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         //尺寸圖: 刪除按鈕
@@ -917,6 +1027,8 @@ WHERE   (YachtID = @YachtID)";
             LabelDimImageMessage.Text = "尺寸圖刪除成功！";
             LabelDimImageMessage.ForeColor = System.Drawing.Color.Blue;
             LabelDimImageMessage.Visible = true;
+            ActiveTabField.Value = "#dimensions"; // 確保停留在尺寸規格分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Download GridView: 編輯按鈕
@@ -925,6 +1037,8 @@ WHERE   (YachtID = @YachtID)";
             int rowIndex = e.NewEditIndex;
             GridViewFile.EditIndex = rowIndex;
             LoadData();
+            ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Download GridView: 取消按鈕
@@ -935,6 +1049,8 @@ WHERE   (YachtID = @YachtID)";
             LabelDownloadGridViewMessage.Text = "已取消編輯！";
             LabelDownloadGridViewMessage.ForeColor = System.Drawing.Color.Blue;
             LabelDownloadGridViewMessage.Visible = true;
+            ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Download GridView: 更新按鈕
@@ -949,6 +1065,8 @@ WHERE   (YachtID = @YachtID)";
                 LabelDownloadGridViewMessage.Text = "檔案名稱不得為空白!";
                 LabelDownloadGridViewMessage.ForeColor = System.Drawing.Color.Red;
                 LabelDownloadGridViewMessage.Visible = true;
+                ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                SetActiveTab(); // 恢復分頁狀態
                 return;
             }
 
@@ -987,6 +1105,8 @@ WHERE   (DownloadID = @DownloadID)";
                 LabelDownloadGridViewMessage.Text = "更新成功!";
                 LabelDownloadGridViewMessage.ForeColor = System.Drawing.Color.Blue;
                 LabelDownloadGridViewMessage.Visible = true;
+                ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+                SetActiveTab(); // 恢復分頁狀態
 
             }
         }
@@ -1017,6 +1137,8 @@ WHERE   (DownloadID = @DownloadID)";
             LabelDownloadGridViewMessage.Text = "檔案刪除成功！";
             LabelDownloadGridViewMessage.ForeColor = System.Drawing.Color.Blue;
             LabelDownloadGridViewMessage.Visible = true;
+            ActiveTabField.Value = "#downloads"; // 確保停留在檔案下載分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // Layout GridView: 刪除按鈕
@@ -1044,6 +1166,8 @@ WHERE   (ImageID = @ImageId)";
             LabelGridViewLayout.Text = "圖片刪除成功！";
             LabelGridViewLayout.ForeColor = System.Drawing.Color.Blue;
             LabelGridViewLayout.Visible = true;
+            ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+            SetActiveTab(); // 恢復分頁狀態
         }
 
         // 輪播圖Repeater: 刪除按鈕
@@ -1071,48 +1195,115 @@ WHERE   (ImageID = @ImageId)";
                 LabelGridViewCarousel.Text = "圖片刪除成功！";
                 LabelGridViewCarousel.ForeColor = System.Drawing.Color.Blue;
                 LabelGridViewCarousel.Visible = true;
+                ActiveTabField.Value = "#gallery"; // 確保停留在圖庫管理分頁
+                SetActiveTab(); // 恢復分頁狀態
             }
         }
 
-   
-
-
-        // 輪播圖Repeater: radiobutton更新
-        protected void RadioButtonSelectHomepage_CheckedChanged(object sender, EventArgs e)
+        private void HandleHomepageCarouselUpdate()
         {
-            RadioButton radioButton = (RadioButton)sender;
-            RepeaterItem item = (RepeaterItem)radioButton.NamingContainer;
-            HiddenField hiddenField = (HiddenField)item.FindControl("HiddenFieldImageID");
-            int selectedImageID = Convert.ToInt32(hiddenField.Value);
-            using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
+            // 從手動 PostBack 的參數中取得被點選的 ImageID
+            string argument = Request.Form["__EVENTARGUMENT"];
+            if (int.TryParse(argument, out int selectedImageID))
             {
-                sqlConnection.Open();
-
-                string sqlReset = @"UPDATE  YachtImages
-SET        IsHomepageCarousel = 0
-WHERE   (YachtID = @YachtID) AND (ImageCategory = N'Carousel')";
-
-                using (SqlCommand sqlCommand = new SqlCommand(sqlReset, sqlConnection))
+                // --- 資料庫更新邏輯 ---
+                using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
                 {
-                    sqlCommand.Parameters.AddWithValue("@YachtID", YachtId);
-                    sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Open();
+                    using (SqlTransaction tran = sqlConnection.BeginTransaction())
+                    {
+                        try
+                        {
+                            // 1. 先將此船型所有輪播圖的 IsHomepageCarousel 重設為 0
+                            string sqlReset = @"UPDATE YachtImages SET IsHomepageCarousel = 0 WHERE (YachtID = @YachtID) AND (ImageCategory = N'Carousel')";
+                            using (SqlCommand cmdReset = new SqlCommand(sqlReset, sqlConnection, tran))
+                            {
+                                cmdReset.Parameters.AddWithValue("@YachtID", this.YachtId);
+                                cmdReset.ExecuteNonQuery();
+                            }
+
+                            // 2. 再將被選中的那一張設為 1
+                            string updateSql = @"UPDATE YachtImages SET IsHomepageCarousel = 1 WHERE (ImageID = @ImageId)";
+                            using (SqlCommand cmdUpdate = new SqlCommand(updateSql, sqlConnection, tran))
+                            {
+                                cmdUpdate.Parameters.AddWithValue("@ImageId", selectedImageID);
+                                cmdUpdate.ExecuteNonQuery();
+                            }
+
+                            tran.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            tran.Rollback();
+                            // 可以在這裡顯示錯誤訊息
+                            LabelGridViewCarousel.Text = "更新失敗，請重試！";
+                            LabelGridViewCarousel.ForeColor = System.Drawing.Color.Red;
+                            LabelGridViewCarousel.Visible = true;
+                        }
+                    }
                 }
 
-                string updateSql = @"UPDATE  YachtImages
-SET        IsHomepageCarousel = 1
-WHERE   (ImageID = @ImageId)";
+                // --- 核心步驟：更新完成後，立刻重新載入資料以顯示變更 ---
+                LoadData();
 
-                using (SqlCommand sqlCommand = new SqlCommand(updateSql, sqlConnection))
-                {
-                    sqlCommand.Parameters.AddWithValue("@ImageId", selectedImageID);
-                    sqlCommand.ExecuteNonQuery();
-                }
+                // 顯示成功訊息
+                LabelGridViewCarousel.Text = "首頁輪播圖已更新！";
+                LabelGridViewCarousel.ForeColor = System.Drawing.Color.Blue;
+                LabelGridViewCarousel.Visible = true;
 
+                // 確保使用者停留在正確的分頁
+                ActiveTabField.Value = "#gallery";
             }
-            LoadData();
-            LabelGridViewCarousel.Text = "更新成功！";
-            LabelGridViewCarousel.ForeColor = System.Drawing.Color.Blue;
-            LabelGridViewCarousel.Visible = true;
         }
+
+
+
+
+        private void SetActiveTab()
+        {
+            // 從 HiddenField 讀取 PostBack 前的頁籤 ID (例如 "#dimensions")
+            string activeTabWithValue = ActiveTabField.Value;
+
+            if (!string.IsNullOrEmpty(activeTabWithValue))
+            {
+                // 移除 '#' 號，得到純 ID (例如 "dimensions")
+                string activeTabId = activeTabWithValue.TrimStart('#');
+
+                // --- 手動清除所有頁籤連結的 'active' class ---
+                mainInfoTab.Attributes["class"] = "nav-link";
+                dimensionsTab.Attributes["class"] = "nav-link";
+                galleryTab.Attributes["class"] = "nav-link";
+                downloadsTab.Attributes["class"] = "nav-link";
+
+                // --- 手動清除所有頁籤內容的 'show active' class ---
+                mainInfo.Attributes["class"] = "tab-pane fade";
+                dimensions.Attributes["class"] = "tab-pane fade";
+                gallery.Attributes["class"] = "tab-pane fade";
+                downloads.Attributes["class"] = "tab-pane fade";
+
+                // --- 根據 ID 找到對應的頁籤連結和內容區塊，並加上 'active' class ---
+                switch (activeTabId)
+                {
+                    case "dimensions":
+                        dimensionsTab.Attributes["class"] = "nav-link active";
+                        dimensions.Attributes["class"] = "tab-pane fade show active";
+                        break;
+                    case "gallery":
+                        galleryTab.Attributes["class"] = "nav-link active";
+                        gallery.Attributes["class"] = "tab-pane fade show active";
+                        break;
+                    case "downloads":
+                        downloadsTab.Attributes["class"] = "nav-link active";
+                        downloads.Attributes["class"] = "tab-pane fade show active";
+                        break;
+                    default: // 預設回到 mainInfo
+                        mainInfoTab.Attributes["class"] = "nav-link active";
+                        mainInfo.Attributes["class"] = "tab-pane fade show active";
+                        break;
+                }
+            }
+        }
+
+       
     }
 }

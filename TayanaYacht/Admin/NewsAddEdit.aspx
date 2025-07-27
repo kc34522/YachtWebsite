@@ -64,7 +64,7 @@
                         </div>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" id="CheckBoxIsVisibleEdit" class="custom-control-input" runat="server" checked="checked" />
-                            <label class="custom-control-label" for="ContentPlaceHolder1_CheckBoxIsVisibleEdit">是否顯示</label>
+                            <label class="custom-control-label" for="ContentPlaceHolder1_CheckBoxIsVisibleEdit">是否顯示於前台</label>
                         </div>
                     </div>
                 </div>
@@ -104,52 +104,32 @@
                 <div class="card-body">
                     <asp:Label ID="LabelImageGridView" runat="server"></asp:Label>
                     <div class="table-responsive">
-                        <%-- 【樣式修正】加入 table-bordered 並補上 thead-dark --%>
-                        <asp:GridView ID="GridViewImage" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowEditing="GridViewImage_RowEditing" OnRowCancelingEdit="GridViewImage_RowCancelingEdit" OnRowUpdating="GridViewImage_RowUpdating" OnRowDeleting="GridViewImage_RowDeleting" CssClass="table table-sm table-bordered" Width="100%">
+                        <%-- 【樣式修正】將 CssClass 與 HeaderStyle 改為與「檔案管理」一致 --%>
+                        <asp:GridView ID="GridViewImage" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="GridViewImage_RowDeleting" CssClass="table table-sm table-bordered" Width="100%">
                             <HeaderStyle CssClass="thead-dark" />
                             <Columns>
                                 <asp:TemplateField HeaderText="圖片">
-                                    <%-- 【已修改】將表頭置中 --%>
                                     <HeaderStyle CssClass="text-center" />
                                     <ItemTemplate>
-                                        <%-- 【已修改】限制圖片最大寬度為 80px --%>
-                                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("ImagePath") %>' AlternateText='<%# Eval("AltText") %>' CssClass="img-thumbnail" Style="max-width: 80px; height: auto;" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("ImagePath") %>' CssClass="img-thumbnail" Style="max-width: 80px; height: auto;" />
                                     </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center" />
+                                    <%-- 【樣式修正】使用 CssClass="align-middle" 來確保垂直置中 --%>
+                                    <ItemStyle HorizontalAlign="Center" CssClass="align-middle" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="說明文字(Alt)">
-                                    <HeaderStyle CssClass="text-center" />
-                                    <EditItemTemplate>
-                                        <asp:TextBox runat="server" Text='<%# Bind("AltText") %>' ID="TextBoxAlt" CssClass="form-control form-control-sm"></asp:TextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label runat="server" Text='<%# Bind("AltText") %>' ID="Label1"></asp:Label>
-                                    </ItemTemplate>
-                                    <ItemStyle CssClass="align-middle" />
 
-                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="封面">
                                     <HeaderStyle CssClass="text-center" />
-                                    <EditItemTemplate>
-                                        <asp:CheckBox runat="server" Checked='<%# Bind("IsCover") %>' ID="CheckBoxIsCover"></asp:CheckBox>
-                                    </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox runat="server" Checked='<%# Bind("IsCover") %>' Enabled="false" ID="CheckBox1"></asp:CheckBox>
+                                        <asp:RadioButton ID="RadioButtonIsCover" runat="server" GroupName="CoverGroup" Checked='<%# Eval("IsCover") %>' AutoPostBack="true" OnCheckedChanged="RadioButtonIsCover_CheckedChanged" />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" CssClass="align-middle" />
                                 </asp:TemplateField>
+
                                 <asp:TemplateField HeaderText="功能">
                                     <HeaderStyle CssClass="text-center" />
                                     <ItemTemplate>
-                                        <div style="white-space: nowrap;">
-                                            <asp:LinkButton ID="btnEdit" CommandName="Edit" runat="server" CssClass="btn btn-sm btn-outline-primary mr-1" ToolTip="編輯"><i class="fa fa-pencil-alt"></i></asp:LinkButton><asp:LinkButton ID="btnDel" CommandName="Delete" runat="server" CssClass="btn btn-sm btn-danger" ToolTip="刪除" OnClientClick="return confirm('您確定要刪除此圖片嗎？');"><i class="fa fa-trash"></i></asp:LinkButton>
-                                        </div>
+                                        <asp:LinkButton ID="btnDel" CommandName="Delete" runat="server" CssClass="btn btn-sm btn-danger" ToolTip="刪除" OnClientClick="return confirm('您確定要刪除此圖片嗎？');"><i class="fas fa-trash"></i></asp:LinkButton>
                                     </ItemTemplate>
-                                    <EditItemTemplate>
-                                        <div style="white-space: nowrap;">
-                                            <asp:LinkButton ID="btnUpdate" CommandName="Update" runat="server" CssClass="btn btn-sm btn-success mr-1" ToolTip="更新"><i class="fa fa-save"></i></asp:LinkButton><asp:LinkButton ID="btnCancel" CommandName="Cancel" runat="server" CssClass="btn btn-sm btn-secondary" ToolTip="取消"><i class="fa fa-times"></i></asp:LinkButton>
-                                        </div>
-                                    </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" CssClass="align-middle" />
                                 </asp:TemplateField>
                             </Columns>

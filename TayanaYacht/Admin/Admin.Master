@@ -2,9 +2,11 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="zh-TW">
 <head runat="server">
     <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -34,9 +36,9 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard.aspx">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="YachtsList.aspx">
                     <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
+                        <i class="fas fa-sailboat"></i>
                     </div>
                     <div class="sidebar-brand-text mx-3">後台管理系統</div>
                 </a>
@@ -46,7 +48,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="Dashboard.aspx">
+                    <a class="nav-link" href="YachtsList.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>TAYANA Yachts</span></a>
                 </li>
@@ -814,21 +816,17 @@
 
     </form>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src='<%= ResolveUrl("~/assets/vendor/jquery/jquery.min.js") %>'></script>
-    <script src='<%= ResolveUrl("~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js") %>'></script>
+    <!-- jQuery 必須最先載 -->
+    <script src="<%= ResolveUrl("~/assets/vendor/jquery/jquery.min.js") %>"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src='<%= ResolveUrl("~/assets/vendor/jquery-easing/jquery.easing.min.js") %>'></script>
+    <!-- 接著載入 Bootstrap Bundle -->
+    <script src="<%= ResolveUrl("~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src='<%= ResolveUrl("~/assets/js/sb-admin-2.min.js") %>'></script>
+    <!-- 再載 easing -->
+    <script src="<%= ResolveUrl("~/assets/vendor/jquery-easing/jquery.easing.min.js") %>"></script>
 
-    <%-- <!-- Page level plugins -->
-    <script src='<%= ResolveUrl("~/assets/vendor/chart.js/Chart.min.js") %>'></script>--%>
+    <!-- 再載 sb‑admin-2 -->
+    <script src="<%= ResolveUrl("~/assets/js/sb-admin-2.min.js") %>"></script>
 
-    <%--<!-- Page level custom scripts -->
-    <script src='<%= ResolveUrl("~/assets/js/demo/chart-area-demo.js") %>'></script>
-    <script src='<%= ResolveUrl("~/assets/js/demo/chart-pie-demo.js") %>'></script>--%>
 </body>
 </html>

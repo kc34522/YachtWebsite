@@ -28,7 +28,8 @@ namespace TayanaYacht
             string sql = @"SELECT   YachtImages.ImagePath, Yachts.IsActive, Yachts.ModelNameText, Yachts.ModelNameNumber, Yachts.IsNewBuilding, Yachts.IsNewDesign
 FROM     Yachts INNER JOIN
               YachtImages ON Yachts.YachtID = YachtImages.YachtID
-WHERE   (Yachts.IsActive = 1) AND (YachtImages.IsHomepageCarousel = 1)";
+WHERE   (Yachts.IsActive = 1) AND (YachtImages.IsHomepageCarousel = 1)
+order by Yachts.IsNewBuilding desc, Yachts.IsNewDesign desc, Yachts.ModelNameNumber asc";
 
             // 使用 DataTable，這是一個可以重複讀取的記憶體資料表
             DataTable dataTable = new DataTable();

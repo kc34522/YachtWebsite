@@ -15,13 +15,76 @@ namespace TayanaYacht.Admin
     {
 
         /// <summary>
-        /// ButtonBack2 控制項。
+        /// ActiveTabField 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonBack2;
+        protected global::System.Web.UI.WebControls.HiddenField ActiveTabField;
+
+        /// <summary>
+        /// lblCardTitle 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCardTitle;
+
+        /// <summary>
+        /// HyperLink2 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+
+        /// <summary>
+        /// mainInfoTab 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor mainInfoTab;
+
+        /// <summary>
+        /// dimensionsTab 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dimensionsTab;
+
+        /// <summary>
+        /// galleryTab 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor galleryTab;
+
+        /// <summary>
+        /// downloadsTab 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor downloadsTab;
+
+        /// <summary>
+        /// mainInfo 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mainInfo;
 
         /// <summary>
         /// txtModelText 控制項。
@@ -66,25 +129,16 @@ namespace TayanaYacht.Admin
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxIsActive;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox CheckBoxIsActive;
 
         /// <summary>
-        /// chkIsNewBuilding 控制項。
+        /// rblBuildDesign 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsNewBuilding;
-
-        /// <summary>
-        /// chkIsNewDesign 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsNewDesign;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblBuildDesign;
 
         /// <summary>
         /// CKEditorOverviewContent 控制項。
@@ -105,13 +159,13 @@ namespace TayanaYacht.Admin
         protected global::CKEditor.NET.CKEditorControl CKEditorSpecification;
 
         /// <summary>
-        /// ButtonCancel 控制項。
+        /// LabelInfoMessage 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCancel;
+        protected global::System.Web.UI.WebControls.Label LabelInfoMessage;
 
         /// <summary>
         /// ButtonSave 控制項。
@@ -123,13 +177,22 @@ namespace TayanaYacht.Admin
         protected global::System.Web.UI.WebControls.Button ButtonSave;
 
         /// <summary>
-        /// LabelInfoMessage 控制項。
+        /// ButtonCancel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelInfoMessage;
+        protected global::System.Web.UI.WebControls.Button ButtonCancel;
+
+        /// <summary>
+        /// dimensions 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dimensions;
 
         /// <summary>
         /// LabelGridViewDimMessage 控制項。
@@ -222,49 +285,31 @@ namespace TayanaYacht.Admin
         protected global::System.Web.UI.WebControls.Label LabelDimUploadMessage;
 
         /// <summary>
-        /// FileUploadDownload 控制項。
+        /// gallery 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadDownload;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gallery;
 
         /// <summary>
-        /// ButtonFileUpload 控制項。
+        /// LabelGridViewLayout 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonFileUpload;
+        protected global::System.Web.UI.WebControls.Label LabelGridViewLayout;
 
         /// <summary>
-        /// LabelDownloadMessage 控制項。
+        /// GridViewLayout 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDownloadMessage;
-
-        /// <summary>
-        /// LabelDownloadGridViewMessage 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDownloadGridViewMessage;
-
-        /// <summary>
-        /// GridViewFile 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewFile;
+        protected global::System.Web.UI.WebControls.GridView GridViewLayout;
 
         /// <summary>
         /// FileUploadLayout 控制項。
@@ -294,22 +339,22 @@ namespace TayanaYacht.Admin
         protected global::System.Web.UI.WebControls.Label LabelLayoutMessage;
 
         /// <summary>
-        /// LabelGridViewLayout 控制項。
+        /// LabelGridViewCarousel 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelGridViewLayout;
+        protected global::System.Web.UI.WebControls.Label LabelGridViewCarousel;
 
         /// <summary>
-        /// GridViewLayout 控制項。
+        /// RepeaterCarouselImages 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewLayout;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterCarouselImages;
 
         /// <summary>
         /// FileUploadCarouselImages 控制項。
@@ -339,21 +384,57 @@ namespace TayanaYacht.Admin
         protected global::System.Web.UI.WebControls.Label LabelCarouselMessage;
 
         /// <summary>
-        /// LabelGridViewCarousel 控制項。
+        /// downloads 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelGridViewCarousel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl downloads;
 
         /// <summary>
-        /// RepeaterCarouselImages 控制項。
+        /// LabelDownloadGridViewMessage 控制項。
         /// </summary>
         /// <remarks>
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterCarouselImages;
+        protected global::System.Web.UI.WebControls.Label LabelDownloadGridViewMessage;
+
+        /// <summary>
+        /// GridViewFile 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewFile;
+
+        /// <summary>
+        /// FileUploadDownload 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadDownload;
+
+        /// <summary>
+        /// ButtonFileUpload 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonFileUpload;
+
+        /// <summary>
+        /// LabelDownloadMessage 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDownloadMessage;
     }
 }

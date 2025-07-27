@@ -47,7 +47,7 @@ namespace TayanaYacht.Admin
                 {
                     sqlConnection.Open();
                     sqlCommand.Parameters.AddWithValue("@userName", userName);
-                    string userId = null;
+                    int userId = 0;
                     string hashedPassword = null;
                     string displayName = null;
                     string userRole = null;
@@ -57,7 +57,7 @@ namespace TayanaYacht.Admin
                         // 讀取資料
                         if (sqlDataReader.Read())
                         {
-                            userId = sqlDataReader["Id"].ToString();
+                            userId = (int)sqlDataReader["Id"];
                             hashedPassword = sqlDataReader["PasswordHash"].ToString();
                             displayName = sqlDataReader["DisplayName"].ToString();
                             userRole = sqlDataReader["Role"].ToString();
@@ -65,7 +65,7 @@ namespace TayanaYacht.Admin
                     }
 
                     // 驗證用戶
-                    if (userId != null)
+                    if (userId > 0)
                     {
                         // 使用 BCrypt 驗證輸入的密碼是否與資料庫中的 Hash 匹配
                         if (BCrypt.Net.BCrypt.Verify(password, hashedPassword))
@@ -103,7 +103,7 @@ namespace TayanaYacht.Admin
         }
 
         // 更新 LastLoginAt 的方法
-        private void UpdateLastLoginTime(string userId, SqlConnection connection)
+        private void UpdateLastLoginTime(int userId, SqlConnection connection)
         {
             string sql = @"Update [User] SET LastLoginAt = GetDate() WHERE Id = @Id";
             using (SqlCommand command = new SqlCommand(sql, connection))

@@ -43,9 +43,10 @@ namespace TayanaYacht.Admin
         // 載入資料庫Certificate Content
         private void LoadCertificateContent()
         {
-            string sql = @"SELECT   [Content], LastUpdated, LastUpdatedUser
-                            FROM     CompanyContent
-                            WHERE   (PageName = N'Certificate')";
+            string sql = @"SELECT   C.[Content], C.LastUpdated, U.DisplayName
+                   FROM     CompanyContent AS C
+                   LEFT JOIN [User] AS U ON C.LastUpdatedUser = U.Id
+                   WHERE    (C.PageName = N'Certificate')";
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {
                 using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
@@ -55,7 +56,15 @@ namespace TayanaYacht.Admin
                     if (sqlDataReader.Read()) // 如果有讀到資料
                     {
                         CKEditorControl1.Text = sqlDataReader["Content"].ToString();
-                        LabelLastUpdatedInfo.Text = $"最後更新時間為: {sqlDataReader["LastUpdated"]}由{sqlDataReader["LastUpdatedUser"]}更新";
+                        // 讀取更新時間和更新者名稱
+                        string lastUpdated = sqlDataReader["LastUpdated"].ToString();
+
+                        // 檢查 DisplayName 是否為 DBNull (因為使用 LEFT JOIN)
+                        string updatedUser = sqlDataReader["DisplayName"] == DBNull.Value
+                                                ? "未知"
+                                                : sqlDataReader["DisplayName"].ToString();
+
+                        LabelLastUpdatedInfo.Text = $"最後更新時間為: {lastUpdated} 由 {updatedUser} 更新";
                     }
 
                 }
@@ -66,21 +75,23 @@ namespace TayanaYacht.Admin
         // Ckeditor儲存按鈕
         protected void ButtonSave_Click(object sender, EventArgs e)
         {
+            int userId = (int)Session["AdminId"];
             string htmlContent = CKEditorControl1.Text;
-            string sql = @"IF EXISTS (
-    SELECT 1  
+            string sql = @"
+IF EXISTS (
+    SELECT 1
     FROM CompanyContent
     WHERE PageName = N'Certificate'
 )
 BEGIN
     UPDATE CompanyContent
-    SET [Content] = @Content, LastUpdated = GETDATE()
+    SET [Content] = @Content, LastUpdated = GETDATE(), LastUpdatedUser = @LastUpdatedUser
     WHERE PageName = N'Certificate'
 END
 ELSE
 BEGIN
-    INSERT INTO CompanyContent (PageName, [Content], LastUpdated)
-    VALUES (N'Certificate', @Content, GETDATE())
+    INSERT INTO CompanyContent (PageName, [Content], LastUpdated, LastUpdatedUser)
+    VALUES (N'Certificate', @Content, GETDATE(), @LastUpdatedUser)
 END
 ";
 
@@ -89,6 +100,8 @@ END
                 using (SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection))
                 {
                     sqlCommand.Parameters.AddWithValue("@Content", htmlContent);
+                    sqlCommand.Parameters.AddWithValue("@LastUpdatedUser", userId);
+
                     sqlConnection.Open();
                     sqlCommand.ExecuteNonQuery();
 

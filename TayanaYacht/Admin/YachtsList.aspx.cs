@@ -26,7 +26,7 @@ namespace TayanaYacht.Admin
         private void LoadYachtList()
         {
             string sql = @"SELECT   YachtID, ModelName, IsNewBuilding, IsNewDesign, IsActive
-FROM     Yachts";
+FROM     Yachts Order by IsNewBuilding desc, IsNewDesign desc, ModelName";
 
             using (SqlConnection sqlConnection = new SqlConnection(WebConfigurationManager.ConnectionStrings["MyDb"].ConnectionString))
             {

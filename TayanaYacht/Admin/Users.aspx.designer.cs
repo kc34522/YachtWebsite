@@ -129,25 +129,7 @@ namespace TayanaYacht.Admin
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxIsActive;
-
-        /// <summary>
-        /// ButtonSave 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonSave;
-
-        /// <summary>
-        /// ButtonCancel 控制項。
-        /// </summary>
-        /// <remarks>
-        /// 自動產生的欄位。
-        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonCancel;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox CheckBoxIsActive;
 
         /// <summary>
         /// infoRow 控制項。
@@ -156,7 +138,7 @@ namespace TayanaYacht.Admin
         /// 自動產生的欄位。
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow infoRow;
+        protected global::System.Web.UI.WebControls.Panel infoRow;
 
         /// <summary>
         /// LiteralCreatedAt 控制項。
@@ -175,5 +157,23 @@ namespace TayanaYacht.Admin
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LiteralLastLoginAt;
+
+        /// <summary>
+        /// ButtonSave 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSave;
+
+        /// <summary>
+        /// ButtonCancel 控制項。
+        /// </summary>
+        /// <remarks>
+        /// 自動產生的欄位。
+        /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonCancel;
     }
 }

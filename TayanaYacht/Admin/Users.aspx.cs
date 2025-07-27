@@ -60,6 +60,7 @@ FROM     [User]";
             {
                 int userId = Convert.ToInt32(e.CommandArgument);
                 LoadUserForEditing(userId);
+                LabelTitle.Text = "編輯使用者";
             }
             else if (e.CommandName == "DeleteUser")
             {
@@ -118,7 +119,7 @@ WHERE   (Id = @userId)";
                             TextBoxDisplayName.Text = reader["DisplayName"].ToString();
                             TextBoxEmail.Text = reader["Email"].ToString();
                             DropDownListRole.SelectedValue = reader["Role"].ToString();
-                            CheckBoxIsActive.Checked = Convert.ToBoolean(reader["IsActive"]);
+                            CheckBoxIsActive.Checked = reader["IsActive"] != DBNull.Value && Convert.ToBoolean(reader["IsActive"]);
 
                             // 顯示唯讀資訊
                             infoRow.Visible = true;
@@ -129,17 +130,10 @@ WHERE   (Id = @userId)";
                             LabelTitle.Text = "編輯用戶：" + reader["DisplayName"].ToString();
                             ButtonSave.Text = "更新";
 
-                            // 保護機制：如果是編輯自己，則不允許修改角色和啟用狀態
-                            if (userId.ToString() == Session["AdminId"].ToString())
-                            {
-                                DropDownListRole.Enabled = false;
-                                CheckBoxIsActive.Enabled = false;
-                            }
-                            else
-                            {
-                                DropDownListRole.Enabled = true;
-                                CheckBoxIsActive.Enabled = true;
-                            }
+                            // 保護機制：僅對自己的帳號禁用角色和啟用狀態
+                            bool isCurrentUser = (userId.ToString() == Session["AdminId"].ToString());
+                            DropDownListRole.Enabled = !isCurrentUser;
+                            CheckBoxIsActive.Disabled = isCurrentUser;
                         }
                     }
                 }
@@ -243,6 +237,8 @@ VALUES  (@UserName, @PasswordHash, @DisplayName, @Email, @Role, @IsActive)";
 
             GetUserList();
             ResetForm();
+            ShowMessage("儲存成功！", Color.Blue);
+
         }
 
 
@@ -257,13 +253,10 @@ VALUES  (@UserName, @PasswordHash, @DisplayName, @Email, @Role, @IsActive)";
             TextBoxEmail.Text = "";
             DropDownListRole.SelectedIndex = 0;
             CheckBoxIsActive.Checked = true;
+            CheckBoxIsActive.Disabled = false;
 
             LabelTitle.Text = "新增用戶";
             ButtonSave.Text = "新增";
-
-            // 恢復被禁用的控制項
-            DropDownListRole.Enabled = true;
-            CheckBoxIsActive.Enabled = true;
 
             infoRow.Visible = false;
         }
@@ -284,7 +277,8 @@ VALUES  (@UserName, @PasswordHash, @DisplayName, @Email, @Role, @IsActive)";
                 // 行為：清空表單
                 ResetForm();
                 ShowMessage("已清空表單，可新增用戶!", Color.Blue);
-           
+            LabelTitle.Text = "新增使用者";
+
 
         }
 

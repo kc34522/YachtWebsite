@@ -5,6 +5,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderHead" runat="server">
     <link rel="stylesheet" type="text/css" href="<%= ResolveUrl("~/Front_Assets/css/jquery.ad-gallery.css") %>">
     <link href="<%= ResolveUrl("~/Front_Assets/css/homestyle.css") %>" rel="stylesheet" type="text/css" />
+    <style>
+        #MainContent_ImageDimension {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bannerMask" runat="server">
     <img src="<%= ResolveUrl("~/Front_Assets/images/banner01_masks.png") %>" alt="&quot;&quot;" />
