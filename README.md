@@ -33,11 +33,6 @@
 
 請依照以下步驟設定您的本機開發環境。
 
-### **先決條件 (Prerequisites)**
-- Visual Studio 2019 或更新版本
-- SQL Server Management Studio (SSMS) 18.0 或更新版本
-- .NET Framework 4.8 開發工具
-
 ### **安裝步驟 (Installation)**
 
 1.  **Clone 專案**
