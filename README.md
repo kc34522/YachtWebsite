@@ -83,7 +83,7 @@
         ```
 
 5.  **補回外部元件（CKFinder）**
-    - 至此頁面下載元件：[iT 邦幫忙 - CKFinder 下載與安裝](https://ithelp.ithome.com.tw/m/articles/10271582)
+    - 至此頁面為CKFinder下載元件教學：[iT 邦幫忙 - CKFinder 下載與安裝](https://ithelp.ithome.com.tw/m/articles/10271582)
     - 將下載後的資料夾放入專案的 CKFinder 資料夾
     - 回到 Visual Studio →「參考 (References)」按右鍵 →「加入參考」→ 指向該 DLL
 
