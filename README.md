@@ -74,8 +74,20 @@
       mailToUser.From = new MailAddress("Your_Email@gmail.com", "Yachts"); // 可以加上寄件人名稱
 
       ```
+4.  **還原 NuGet 套件**
+    - 使用 Visual Studio 開啟 `.sln` 方案檔
+    - 在「方案總管」對著「方案」按右鍵 → 點選「還原 NuGet 套件」
+    - 若還原無反應，請在「套件管理員主控台」執行：
+        ```powershell
+        Update-Package -reinstall
+        ```
 
-4.  **啟動專案**
+5.  **補回外部元件（CKFinder）**
+    - 至此頁面下載元件：[iT 邦幫忙 - CKFinder 下載與安裝](https://ithelp.ithome.com.tw/m/articles/10271582)
+    - 將下載後的資料夾放入專案的 CKFinder 資料夾
+    - 回到 Visual Studio →「參考 (References)」按右鍵 →「加入參考」→ 指向該 DLL
+
+6.  **啟動專案**
     - 在 Visual Studio 中，按下 `F5` 或點擊 "IIS Express" 按鈕來執行專案。
 
 
